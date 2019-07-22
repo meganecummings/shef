@@ -31,7 +31,12 @@ app.use('/', (req, res)=> {
 });
 
 // // All User Endpoints
-app.use('/users', routes.users);
+app.use('/users', (req, res) => {
+    db.User.create(req.body, (err, newUser) => {
+        if (err) return res.sendStatus(400);
+        res.sendStatus(200);
+    });
+});
 
 // All Recipe Library Endpoints 
 app.use('/library', routes.library);
