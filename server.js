@@ -24,10 +24,13 @@ app.use(express.static(`${__dirname}/public`));
 app.use(express.json());
 
 
+//EJS Middleware
+app.set('view engine', 'ejs');
+
 // ------------------- ROUTES -------------------- //
 
 app.use('/', (req, res)=> {
-    res.sendFile(`${__dirname}/views/index.html`);
+    res.render('index');
 });
 
 // // All User Endpoints
