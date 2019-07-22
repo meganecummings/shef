@@ -32,9 +32,8 @@ app.set('view engine', 'ejs');
 
 // ------------------- ROUTES -------------------- //
 //ROOT ROUTE
-app.use('/', (req, res)=> {
+app.get('/', (req, res)=> {
     res.sendFile(`${__dirname}/views/index.html`);
-
     // res.render('index');
 });
 
@@ -46,14 +45,14 @@ app.get('/users', (req, res) => {
             status: 400,
             message: 'Something went wrong, please try again'
         });
-        res.sendStatus(200).json({
+        res.status(200).json({
             status: 200,
             numberOfResults: allUsers.length,
             data: allUsers,
             requestedAt: getTime(),
         });
     });
-    console.log(allUsers);
+    // console.log(allUsers);
 
 });
 
@@ -81,7 +80,7 @@ app.get('/recipes', (req, res) => {
             status: 400,
             message: 'Something went wrong, please try again'
         });
-        res.sendStatus(200).json({
+        res.status(200).json({
             status: 200,
             numberOfResults: allRecipes.length,
             data: allRecipes,
@@ -122,8 +121,8 @@ app.post('/recipes', (req, res) => {
 });
 
 // Recipe Update 
-app.put('/recipes/:recipe_name', (req, res) => {
-    db.Recipe.findOneAndUpdate(req.params.recipe_name, req.body, { new: true }, (err, updatedRecipe) => {
+app.put('/recipes/:name', (req, res) => {
+    db.Recipe.findOneAndUpdate(req.params.name, req.body, { new: true }, (err, updatedRecipe) => {
         console.log(req.body);
         if (err) return res.status(400).json({
             status: 400,
@@ -138,8 +137,8 @@ app.put('/recipes/:recipe_name', (req, res) => {
 });
 
 // Recipe DESTROY
-app.delete('/recipe/:recipe_name', (req, res) => {
-    db.Recipe.findOneAndDelete(req.params.recipe_name, (err, deletedRecipe) => {
+app.delete('/recipes/:name', (req, res) => {
+    db.Recipe.findOneAndDelete(req.params.name, (err, deletedRecipe) => {
         if (err) return res.status(400).json({
             status: 400,
             message: 'Something went wrong, please try again',
