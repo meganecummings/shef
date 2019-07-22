@@ -33,7 +33,9 @@ app.set('view engine', 'ejs');
 // ------------------- ROUTES -------------------- //
 //ROOT ROUTE
 app.use('/', (req, res)=> {
-    res.render('index');
+    res.sendFile(`${__dirname}/views/index.html`);
+
+    // res.render('index');
 });
 
 // Users Index
@@ -51,6 +53,8 @@ app.get('/users', (req, res) => {
             requestedAt: getTime(),
         });
     });
+    console.log(allUsers);
+
 });
 
 // Users Create
@@ -88,7 +92,7 @@ app.get('/recipes', (req, res) => {
 
 // Recipes SHOW 
 app.get('/recipes/:recipe_name', (req, res) => {
-    db.Recipe.findById(req.params.recipe_name, (err, foundRecipe) => {
+    db.Recipe.findOne(req.params.recipe_name, (err, foundRecipe) => {
         if (err) return res.status(400).json({
             status: 400,
             message: 'Something went wrong, please try again',
