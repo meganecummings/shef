@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const routes = require('./routes');
 const db = require('./models');
-
+const router = express.Router();
 
 // ------------------- GLOBAL VARIABLES -------------------- //
 const PORT = process.env.PORT || 4000;
@@ -23,6 +23,7 @@ app.use(express.static(`${__dirname}/public`));
 
 app.use(express.json());
 
+
 // ------------------- ROUTES -------------------- //
 
 app.use('/', (req, res)=> {
@@ -30,14 +31,18 @@ app.use('/', (req, res)=> {
 });
 
 // // All User Endpoints
-// app.use('/api/user', routes.user);
+app.use('/users', routes.users);
 
-// // All Recipe Endpoints 
-// app.use('/api/recipes', routes.recipes);
+// All Recipe Library Endpoints 
+app.use('/library', routes.library);
+
+// Randomizer Endpoint 
+app.use('/random', routes.random);
 
 //HTML
 
 //API
+
 
 // ------------------- SERVER LISTENERS -------------------- //
 
