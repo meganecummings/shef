@@ -77,7 +77,7 @@ We plan to Reference Recipes within User Accounts/Profiles for an Reference Data
 
 ![img_5274 1](https://media.git.generalassemb.ly/user/21286/files/fb3e9800-accc-11e9-9655-f7dea3009700)
 
-**Schemas:**
+**Schemas**
 
 *User Schemas*
 Name: String, 
