@@ -75,7 +75,7 @@ We plan to Reference Recipes within User Accounts/Profiles for an Reference Data
 
 **ERD** 
 
-**Schemas::
+**Schemas:**
 
 *User Schemas*
 Name: String
