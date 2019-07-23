@@ -3,6 +3,25 @@
 }
 
 body {
-    background-color: blanchedalmond;
+
 }
 
+.navbar, .navbar-bottom {
+    background-color: white;
+}
+
+.navbar-brand, .nav-link {
+    color: black;
+}
+
+.background-container {
+    position: relative;
+    width: 100%;
+}
+
+img {
+    width: 100vw;
+    object-fit: fill;
+    position: absolute;
+    z-index: -1;
+}
