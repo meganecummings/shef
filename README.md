@@ -75,23 +75,25 @@ We plan to Reference Recipes within User Accounts/Profiles for an Reference Data
 
 **ERD** 
 
+![img_5274 1](https://media.git.generalassemb.ly/user/21286/files/fb3e9800-accc-11e9-9655-f7dea3009700)
+
 **Schemas:**
 
 *User Schemas*
-Name: String
-Date of Birth: Number
-Favorite Food: String
-Location: String
+Name: String, 
+Date of Birth: Number, 
+Favorite Food: String, 
+Location: String,
 Img: String
 
 *Recipe Schema*
-Name String
-Ingredients Array Objects
-name: String
-amount: Number
-measurement unit: String
-Procedure: String
-Image: String
+Name: String, 
+Ingredients: [ Objects ],
+name: String,
+amount: Number,
+measurement unit: String,
+Procedure: String,
+Image: String, 
 Reference: User
 
 **Feasibility Options**
