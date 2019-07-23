@@ -1,5 +1,5 @@
 # Shef
-Shef will serve as your personal library for carefully personal recipe library. Easily write, edit, delete and view all of your favorite recipes.
+Shef will serve as the personal library for all your favorite recipes. Easily write, edit, delete and view all of your favorite recipes.
 
 ### Motivation
 Recipes shouldn't need clean up.
