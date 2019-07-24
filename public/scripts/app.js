@@ -2,14 +2,13 @@ console.log('Hey there!');
 
 
 // ----------------- CONSTANT VARIABLES ------------------ //
-const BASE_URL = ('/newrecipe');
+const BASE_URL = ('/api/newrecipe');
 const LIB_URL = ('/api/recipes');
 
 // ------------------- GLOBAL VARIABLES -------------------- //
 
 // ------------------- STATE VARIABLES -------------------- //
 const libary = {
-    
     filtered: []
 }
 
@@ -23,27 +22,27 @@ const newRecipeForm = document.getElementById('newRecipeForm');
 const recipesSection = document.getElementById('recipesSection');
 const recipesLibrary = document.getElementById('recipesLibrary');
 
+
 // ------------------- FUNCTIONS -------------------- //
 
 const render = () => {
     recipesSection.innerHTML = '';
-        const template = recipeTemplate(state.recipe);
-        recipesSection.insertAdjacentHTML('afterbegin', template);
+    const template = recipeTemplate(state.recipe);
+    recipesSection.insertAdjacentHTML('afterbegin', template);
 }
 
 const renderLib = () => {
     recipesLibrary.innerHTML = '';
     state.recipes.forEach(data => {
-        console.log(data);
         const template = libTemplate(data);
         recipesLibrary.insertAdjacentHTML('afterbegin', template);
-      });
+    });
 }
 
 
-const recipeTemplate = (recipe) => {    
+const recipeTemplate = (recipe) => {
     return `
-    <div id="${recipe.name}">
+    <div id="${recipe._id}">
     <h4>${recipe.name}</h4>
     <p class="ingredients">${recipe.ingredients}</p>
     <p class="procedure">${recipe.procedure}</p>
@@ -53,7 +52,7 @@ const recipeTemplate = (recipe) => {
     `
 }
 
-const libTemplate = (recipe) => {    
+const libTemplate = (recipe) => {
     return `
     <div id="${recipe._id}">
     <h4>${recipe.name}</h4>
@@ -63,17 +62,17 @@ const libTemplate = (recipe) => {
 
 const getAllRecipes = () => {
     fetch(LIB_URL)
-    .then((res) => res.json())
-    .then(json => {
-      state.recipes = json.data;
-      renderLib(state.recipes);
-    })
-    .catch((err) => console.log({ err }));
-    
+        .then((res) => res.json())
+        .then(json => {
+            state.recipes = json.data;
+            renderLib(state.recipes);
+        })
+        .catch((err) => console.log({ err }));
+
 }
-
-getAllRecipes();
-
+if (recipesLibrary) {
+    getAllRecipes();
+};
 
 const addNewRecipe = (event) => {
     event.preventDefault();
@@ -115,7 +114,87 @@ const newRecipeError = (error) => {
     alert(error);
 };
 
+const editRecipe = (event) => {
+    const recipeName = event.target.parentNode.children[0].innerText;
+    const recipeIngredients =
+        event.target.parentNode.children[1].innerText;
+    const recipeProcedure = event.target.parentNode.children[2].innerText;
+    event.target.parentNode.innerHTML = `
+    <h4>Edit ${recipeName}</h4>
+    <form>
+        <div>
+            <label style="display:block;" for="recipeName">Recipe Name</label>
+            <input type="text" id="editRecipeName" name="name" value="${recipeName}"/>
+        </div>
+        <div>
+            <label style="display:block;" for="recipeIngredients">Recipe Ingredients</label>
+            <input type="text" id="editRecipeIngredients" name="ingredients" value="${recipeIngredients}"/>
+        </div>
+        <div>
+            <label style="display:block;" for="recipeProcedure">Recipe Procedure</label>
+            <input type="text" id="editRecipeProcedure" name="procedure" value="${recipeProcedure}"/>
+        </div>
+        <button type="button" class="cancel-edit">Cancel</button>
+        <button type="submit" class="submit-edit">Submit</button>
+    </form>
+    `;
+};
+
+const updateRecipe = (event) => {
+    const recipeId = event.target.parentNode.parentNode.id;
+    const recipeName = document.getElementById('editRecipeName').value;
+    const recipeIngredients = document.getElementById('editRecipeIngredients').value;
+    const recipeProcedure = document.getElementById('editRecipeProcedure').value;
+    const updatedRecipe = { name: recipeName, ingredients: recipeIngredients, procedure: recipeProcedure };
+    console.log(recipeId);
+    fetch(`${BASE_URL}/${recipeId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedRecipe),
+    })
+    .then(res => res.json())
+    .then((data) => {
+        state.recipe = data.data;
+        render(state.recipes)})
+    .catch((error) => console.log(error))
+}
+
+
+const deleteRecipe = (event) => {
+    const recipeId = event.target.parentNode.id;
+    console.log(recipeId);
+    fetch(`${BASE_URL}/${recipeId}`, {
+        method: 'delete'
+    })
+        .then((response) => response.json())
+        .then(recipesSection.innerHTML = '')
+        .catch((err) => console.log(err))
+};
+
+const handleRecipesSectionClick = (event) => {
+    event.preventDefault();
+    if (event.target.classList.contains('edit-button')) {
+        editRecipe(event);
+    };
+    if (event.target.classList.contains('delete-button')) {
+        deleteRecipe(event);
+    };
+    if (event.target.classList.contains('cancel-edit')) {
+        render(state.recipe);
+    };
+    if (event.target.classList.contains('submit-edit')) {
+        updateRecipe(event);
+    };
+};
+
+
 // ------------------- EVENT LISTENERS -------------------- //
 if (newRecipeForm) {
     newRecipeForm.addEventListener('submit', addNewRecipe);
-}
+};
+
+if (recipesSection) {
+    recipesSection.addEventListener('click', handleRecipesSectionClick);
+};

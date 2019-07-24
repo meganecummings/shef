@@ -51,7 +51,7 @@ module.exports = {
     },
 
     update: (req, res) => {
-        db.Recipe.findOneAndUpdate(req.params.name, req.body, { new: true }, (err, updatedRecipe) => {
+        db.Recipe.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, updatedRecipe) => {
             console.log(req.body);
             if (err) return res.status(400).json({
                 status: 400,
