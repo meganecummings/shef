@@ -160,6 +160,9 @@ const handleRecipesSectionClick = (event) => {
     if (event.target.classList.contains('delete-button')) {
         deleteRecipe(event);
     };
+    if (event.target.classList.contains('cancel-edit')) {
+        render(state.recipe);
+    };
 }
 
 
