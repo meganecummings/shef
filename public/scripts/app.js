@@ -21,6 +21,7 @@ const state = {
 const newRecipeForm = document.getElementById('newRecipeForm');
 const recipesSection = document.getElementById('recipesSection');
 const recipesLibrary = document.getElementById('recipesLibrary');
+const recipeSection = document.getElementById('recipeSection');
 
 
 // ------------------- FUNCTIONS -------------------- //
@@ -29,6 +30,12 @@ const render = () => {
     recipesSection.innerHTML = '';
     const template = recipeTemplate(state.recipe);
     recipesSection.insertAdjacentHTML('afterbegin', template);
+}
+
+const renderRecipe = () => {
+    recipeSection.innerHTML = '';
+    const template = recipeTemplate(state.recipes);
+    recipeSection.insertAdjacentHTML('afterbegin', template);
 }
 
 const renderLib = () => {
@@ -41,6 +48,7 @@ const renderLib = () => {
 
 
 const recipeTemplate = (recipe) => {
+    console.log(recipe);
     return `
     <div id="${recipe._id}">
     <h4>${recipe.name}</h4>
@@ -55,9 +63,23 @@ const recipeTemplate = (recipe) => {
 const libTemplate = (recipe) => {
     return `
     <div id="${recipe._id}">
-        <a href="/recipes/${recipe._id}"><h4>${recipe.name}</h4></a>
+        <a href="/recipe"><h4>${recipe.name}</h4></a>
     </div>
     `
+}
+
+const getRecipe = () => {
+    fetch(LIB_URL)
+        .then((res) => res.json())
+        .then(json => {
+            state.recipes = json.data;
+            renderRecipe(state.recipes);
+        })
+        .catch((err) => console.log({ err }));
+}
+
+if (recipeSection) {
+    getRecipe();
 }
 
 const getAllRecipes = () => {

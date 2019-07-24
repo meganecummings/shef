@@ -40,7 +40,29 @@ app.get('/newrecipe', (req, res) => {
     res.sendFile(`${__dirname}/views/newrecipe.html`);
 });
 
-// Recipes Route
+// New Recipe Route
+app.get('/recipe', (req, res) => {
+    res.sendFile(`${__dirname}/views/recipe.html`);
+});
+
+// Recipe Route
+// router.get('/:_id', ctrl.recipeCtrl.show);
+app.get('/recipe/:_id', (req, res) => {
+    db.Recipe.findById(req.params._id, (err, foundRecipe) => {
+        if (err) return res.status(400).json({
+            status: 400,
+            message: 'Something went wrong, YOU GOOFED',
+            error: err,
+        });
+        res.status(200).json({
+            status: 200,
+            data: foundRecipe,
+            requestedAt: getTime()
+        });
+    });
+});
+
+// Recipe(s) Route
 app.get('/recipes', (req, res) => {
     res.sendFile(`${__dirname}/views/recipes.html`);
 });
