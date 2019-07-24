@@ -140,6 +140,27 @@ const editRecipe = (event) => {
     `;
 };
 
+const updateRecipe = (event) => {
+    const recipeId = event.target.parentNode.parentNode.id;
+    const recipeName = document.getElementById('editRecipeName').value;
+    const recipeIngredients = document.getElementById('editRecipeIngredients').value;
+    const recipeProcedure = document.getElementById('editRecipeProcedure').value;
+    const updatedRecipe = { name: recipeName, ingredients: recipeIngredients, procedure: recipeProcedure };
+    console.log(recipeId);
+    fetch(`${BASE_URL}/${recipeId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedRecipe),
+    })
+    .then(res => res.json())
+    .then((data) => {
+        state.recipe = data.data;
+        render(state.recipes)})
+    .catch((error) => console.log(error))
+}
+
 
 const deleteRecipe = (event) => {
     const recipeId = event.target.parentNode.id;
@@ -163,7 +184,10 @@ const handleRecipesSectionClick = (event) => {
     if (event.target.classList.contains('cancel-edit')) {
         render(state.recipe);
     };
-}
+    if (event.target.classList.contains('submit-edit')) {
+        updateRecipe(event);
+    };
+};
 
 
 // ------------------- EVENT LISTENERS -------------------- //

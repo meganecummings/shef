@@ -31,7 +31,7 @@ app.set('view engine', 'ejs');
 
 // ------------------- ROUTES -------------------- //
 //ROOT ROUTE
-app.get('/', (req, res)=> {
+app.get('/', (req, res) => {
     res.sendFile(`${__dirname}/views/index.html`);
 });
 
@@ -48,15 +48,15 @@ app.get('/recipes', (req, res) => {
 //New Recipe Create
 app.post('/api/newrecipe', (req, res) => {
     db.Recipe.create(req.body, (err, createdRecipe) => {
-        if (err) return res.status(400).json({ 
-            status: 400, 
-            message: 'Something went wrong! Please try again...', 
+        if (err) return res.status(400).json({
+            status: 400,
+            message: 'Something went wrong! Please try again...',
             error: err
-        }); 
+        });
         res.status(200).json({
-            status: 201, 
-            data: createdRecipe, 
-            requestedAt: getTime(), 
+            status: 201,
+            data: createdRecipe,
+            requestedAt: getTime(),
         });
     });
 });
@@ -74,17 +74,29 @@ app.delete('/api/newrecipe/:_id', (req, res) => {
             requestedAt: getTime(),
         });
     });
-}
-);
+});
+
+//New Recipe Update
+app.put('/api/newrecipe/:_id', (req, res) => {
+    db.Recipe.findByIdAndUpdate(req.params._id, req.body, { new: true }, (err, updatedRecipe) => {
+        if (err) return res.status(400).json({
+            status: 400,
+            message: 'Something went wrong, please try again',
+        });
+        res.status(200).json({
+            status: 202,
+            data: updatedRecipe,
+            requestedAt: getTime(),
+        });
+    });
+});
+
 
 // Users Index
 app.use('/users', routes.users);
 
 // Recipe Index
 app.use('/api/recipes', routes.recipes);
-
-// // All Recipe Library Endpoints 
-// app.use('/library', routes.library);
 
 // // Randomizer Endpoint 
 // app.use('/random', routes.random);
