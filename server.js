@@ -30,6 +30,11 @@ app.get('/', (req, res)=> {
     res.sendFile(`${__dirname}/views/index.html`);
 });
 
+// New Recipe Route
+app.get('/newrecipe', (req, res)=> {
+    res.sendFile(`${__dirname}/views/newrecipe.html`);
+});
+
 // Users Index
 app.use('/users', routes.users);
 
