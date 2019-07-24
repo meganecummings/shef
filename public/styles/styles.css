@@ -46,6 +46,15 @@ body {
 .nav-item-footer {
     margin-left: 2em;
 }
+
+#newRecipeForm {
+    padding: 5em;
+}
+
+.recipesContainer {
+    margin: 5em;
+}
+
 /* 
 .icon-img {
     padding: 0;
