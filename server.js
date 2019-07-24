@@ -40,7 +40,7 @@ app.get('/newrecipe', (req, res) => {
     res.sendFile(`${__dirname}/views/newrecipe.html`);
 });
 
-// New Recipes Route
+// Recipes Route
 app.get('/recipes', (req, res) => {
     res.sendFile(`${__dirname}/views/recipes.html`);
 });
