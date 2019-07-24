@@ -46,7 +46,7 @@ app.get('/recipes', (req, res) => {
 });
 
 //New Recipe Create
-app.post('/newrecipe', (req, res) => {
+app.post('/api/newrecipe', (req, res) => {
     db.Recipe.create(req.body, (err, createdRecipe) => {
         if (err) return res.status(400).json({ 
             status: 400, 
@@ -60,6 +60,22 @@ app.post('/newrecipe', (req, res) => {
         });
     });
 });
+
+//New Recipe Delete
+app.delete('/api/newrecipe/:_id', (req, res) => {
+    db.Recipe.findByIdAndDelete(req.params._id, (err, deletedRecipe) => {
+        if (err) return res.status(400).json({
+            status: 400,
+            message: 'Something went wrong, please try again',
+        });
+        res.status(200).json({
+            status: 200,
+            message: `Successfully deleted ${deletedRecipe}`,
+            requestedAt: getTime(),
+        });
+    });
+}
+);
 
 // Users Index
 app.use('/users', routes.users);
