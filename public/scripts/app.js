@@ -55,10 +55,10 @@ const recipeTemplate = (recipe) => {
 const libTemplate = (recipe) => {
     return `
     <div id="${recipe._id}">
-    <h4>${recipe.name}</h4>
+        <a href="/recipes/${recipe._id}"><h4>${recipe.name}</h4></a>
+    </div>
     `
 }
-
 
 const getAllRecipes = () => {
     fetch(LIB_URL)
