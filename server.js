@@ -40,6 +40,11 @@ app.get('/newrecipe', (req, res) => {
     res.sendFile(`${__dirname}/views/newrecipe.html`);
 });
 
+// New Recipes Route
+app.get('/recipes', (req, res) => {
+    res.sendFile(`${__dirname}/views/recipes.html`);
+});
+
 //New Recipe Create
 app.post('/newrecipe', (req, res) => {
     db.Recipe.create(req.body, (err, createdRecipe) => {
@@ -60,7 +65,7 @@ app.post('/newrecipe', (req, res) => {
 app.use('/users', routes.users);
 
 // Recipe Index
-app.use('/recipes', routes.recipes);
+app.use('/api/recipes', routes.recipes);
 
 // // All Recipe Library Endpoints 
 // app.use('/library', routes.library);

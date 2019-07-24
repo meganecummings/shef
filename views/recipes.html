@@ -17,7 +17,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-        <!-- Main CSS -->
+    <!-- Main CSS -->
     <link rel="stylesheet" href="/styles/styles.css">
     <!-- Main JS -->
     <script src="/scripts/app.js" defer>
@@ -56,16 +56,11 @@
         </nav>
     </header>
     <main>
-        <section>
-            <form id="newRecipeForm">
-                    <h1>New Recipe</h1>
-                <input type="text" id="name" name="name" placeholder="Name of Recipe" />
-                <input type="text" id="ingredients" name="ingredients" placeholder="Put your Ingredients here" />
-                <input type="text" id="procedure" name="procedure" placeholder="Put your Procedure here" />
-                <button type="submit" id="add-recipe-btn">Add Recipe</button>
-            </form>
-        </section>
-        <section id="recipesSection"></section>
+        <div class="recipesContainer">
+            <h1>Recipes:</h1>
+            <section id="recipesLibrary">
+            </section>
+        </div>
     </main>
     <footer class="page-footer">
         <nav class="navbar navbar-expand-sm fixed-bottom footer">
