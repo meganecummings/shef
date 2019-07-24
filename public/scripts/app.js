@@ -1,20 +1,27 @@
-console.log('Hey there!')
+console.log('Hey there!');
+
 
 // ----------------- CONSTANT VARIABLES ------------------ //
 const BASE_URL = ('/newrecipe');
+const LIB_URL = ('/api/recipes');
 
 // ------------------- GLOBAL VARIABLES -------------------- //
 
 // ------------------- STATE VARIABLES -------------------- //
+const libary = {
+    
+    filtered: []
+}
+
 const state = {
     recipe: {},
-    filtered: []
+    recipes: []
 }
 
 // ------------------- DOM ELEMENTS -------------------- //
 const newRecipeForm = document.getElementById('newRecipeForm');
-
 const recipesSection = document.getElementById('recipesSection');
+const recipesLibrary = document.getElementById('recipesLibrary');
 
 // ------------------- FUNCTIONS -------------------- //
 
@@ -23,6 +30,16 @@ const render = () => {
         const template = recipeTemplate(state.recipe);
         recipesSection.insertAdjacentHTML('afterbegin', template);
 }
+
+const renderLib = () => {
+    recipesLibrary.innerHTML = '';
+    state.recipes.forEach(data => {
+        console.log(data);
+        const template = libTemplate(data);
+        recipesLibrary.insertAdjacentHTML('afterbegin', template);
+      });
+}
+
 
 const recipeTemplate = (recipe) => {    
     return `
@@ -36,25 +53,26 @@ const recipeTemplate = (recipe) => {
     `
 }
 
-
-// const getAllRecipes = () => {
-//     fetch(BASE_URL, {
-
-//     })
-//         .then((response) => {
-//         response.json()
-//         // console.log(response)
-//         })
-//         .then(json => {
-//             console.log(json)
-//             state.recipes = json;
-//         })
-//         .catch((err) => console.log(err))
-// }
-
-// getAllRecipes();
+const libTemplate = (recipe) => {    
+    return `
+    <div id="${recipe._id}">
+    <h4>${recipe.name}</h4>
+    `
+}
 
 
+const getAllRecipes = () => {
+    fetch(LIB_URL)
+    .then((res) => res.json())
+    .then(json => {
+      state.recipes = json.data;
+      renderLib(state.recipes);
+    })
+    .catch((err) => console.log({ err }));
+    
+}
+
+getAllRecipes();
 
 
 const addNewRecipe = (event) => {
@@ -78,6 +96,7 @@ const addNewRecipe = (event) => {
         .then((res) => res.json())
         .then((data) => {
             state.recipe = data.data;
+            // library.recipes.push(data.data);
             render(state.recipes);
             name.value = '';
             ingredients.value = '';
@@ -97,4 +116,6 @@ const newRecipeError = (error) => {
 };
 
 // ------------------- EVENT LISTENERS -------------------- //
-newRecipeForm.addEventListener('submit', addNewRecipe);
+if (newRecipeForm) {
+    newRecipeForm.addEventListener('submit', addNewRecipe);
+}
