@@ -1,0 +1,16 @@
+<% include ../partials/_head.ejs %>
+
+<main id="mainContainerNR">
+        <section>
+            <form id="newRecipeForm">
+                    <h1>New Recipe</h1>
+                <input type="text" id="name" name="name" placeholder="Name of Recipe" />
+                <input type="text" id="ingredients" name="ingredients" placeholder="Put your Ingredients here" />
+                <input type="text" id="procedure" name="procedure" placeholder="Put your Procedure here" />
+                <button type="submit" id="add-recipe-btn">Add Recipe</button>
+            </form>
+        </section>
+        <section id="recipesSection"></section>
+    </main>
+
+<% include ../partials/_footer.ejs %>
