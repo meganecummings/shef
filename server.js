@@ -129,3 +129,35 @@ app.use('/api/recipes', routes.recipes);
 app.listen(PORT, () => {
     console.log(`Welcome to SHEF! You are connected on port ${PORT}`);
 })
+
+
+//-------------------------------------------------------//
+//New Recipe Delete
+app.delete('/api/recipes/:_id', (req, res) => {
+    db.Recipe.findByIdAndDelete(req.params._id, (err, deletedRecipe) => {
+        if (err) return res.status(400).json({
+            status: 400,
+            message: 'Something went wrong, please try again',
+        });
+        res.status(200).json({
+            status: 200,
+            message: `Successfully deleted ${deletedRecipe}`,
+            requestedAt: getTime(),
+        });
+    });
+});
+
+//New Recipe Update
+app.put('/api/recipes/:_id', (req, res) => {
+    db.Recipe.findByIdAndUpdate(req.params._id, req.body, { new: true }, (err, updatedRecipe) => {
+        if (err) return res.status(400).json({
+            status: 400,
+            message: 'Something went wrong, please try again',
+        });
+        res.status(200).json({
+            status: 202,
+            data: updatedRecipe,
+            requestedAt: getTime(),
+        });
+    });
+});
