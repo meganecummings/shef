@@ -1,6 +1,4 @@
-console.log('Hey there!');
-console.log($);
-
+console.log('Chef, enter your recipe')
 
 // ----------------- CONSTANT VARIABLES ------------------ //
 const BASE_URL = ('/api/newrecipe');
@@ -9,9 +7,7 @@ const LIB_URL = ('/api/recipes');
 // ------------------- GLOBAL VARIABLES -------------------- //
 
 // ------------------- STATE VARIABLES -------------------- //
-const libary = {
-    filtered: []
-}
+
 
 const state = {
     recipe: {},
@@ -19,6 +15,7 @@ const state = {
 }
 
 // ------------------- DOM ELEMENTS -------------------- //
+
 const newRecipeForm = document.getElementById('newRecipeForm');
 const recipesSection = document.getElementById('recipesSection');
 const recipesLibrary = document.getElementById('recipesLibrary');
@@ -26,8 +23,6 @@ const recipeSection = document.getElementById('recipeSection');
 const $recipesLibrary = $('#recipesLibrary');
 const mainContainerR = document.getElementById('mainContainerR');
 const $mainContainerR = $('#mainContainerR');
-
-// const editBtns = document.getElementsByClassName('edit-btns');
 
 // ------------------- FUNCTIONS -------------------- //
 
@@ -97,6 +92,7 @@ const getAllRecipes = () => {
         .catch((err) => console.log({ err }));
 
 }
+
 if (recipesLibrary) {
     getAllRecipes();
 };
@@ -148,22 +144,22 @@ const editRecipe = (event) => {
     const recipeProcedure = event.target.parentNode.children[2].innerText;
     event.target.parentNode.innerHTML = `
     <h4>Edit ${recipeName}</h4>
-    <form>
-        <div>
-            <label style="display:block;" for="recipeName">Recipe Name</label>
-            <input type="text" id="editRecipeName" name="name" value="${recipeName}"/>
-        </div>
-        <div>
-            <label style="display:block;" for="recipeIngredients">Recipe Ingredients</label>
-            <input type="text" id="editRecipeIngredients" name="ingredients" value="${recipeIngredients}"/>
-        </div>
-        <div>
-            <label style="display:block;" for="recipeProcedure">Recipe Procedure</label>
-            <input type="text" id="editRecipeProcedure" name="procedure" value="${recipeProcedure}"/>
-        </div>
-        <button type="button" class="cancel-edit">Cancel</button>
-        <button type="submit" class="submit-edit">Submit</button>
-    </form>
+        <form>
+            <div>
+                <label style="display:block;" for="recipeName">Recipe Name</label>
+                <input type="text" id="editRecipeName" name="name" value="${recipeName}"/>
+            </div>
+            <div>
+                <label style="display:block;" for="recipeIngredients">Recipe Ingredients</label>
+                <input type="text" id="editRecipeIngredients" name="ingredients" value="${recipeIngredients}"/>
+            </div>
+            <div>
+                <label style="display:block;" for="recipeProcedure">Recipe Procedure</label>
+                <input type="text" id="editRecipeProcedure" name="procedure" value="${recipeProcedure}"/>
+            </div>
+            <button type="button" class="cancel-edit">Cancel</button>
+            <button type="submit" class="submit-edit">Submit</button>
+        </form>
     `;
 };
 
@@ -220,6 +216,7 @@ const handleRecipesSectionClick = (event) => {
 };
 
 // ------------------- EVENT LISTENERS -------------------- //
+
 if (newRecipeForm) {
     newRecipeForm.addEventListener('submit', addNewRecipe);
 };
@@ -227,10 +224,6 @@ if (newRecipeForm) {
 if (recipesSection) {
     recipesSection.addEventListener('click', handleRecipesSectionClick);
 };
-
-if (mainContainerR) {
-    mainContainerR.addEventListener('click', handleRecipesSectionClick);
-}
 
 $recipesLibrary.on('click', '.individualRecipe', (e) => {
     const $recipeId = ($(e.target).parent().attr('id'));
@@ -242,18 +235,100 @@ $recipesLibrary.on('click', '.individualRecipe', (e) => {
             $mainContainerR.empty();
             $mainContainerR.append(`
             <section id="recipesSection">    
-            <div id="${state.recipes[i]._id}">
+                <div id="${state.recipes[i]._id}">
                     <h4>${state.recipes[i].name}</h4>
                     <p class="ingredients">${state.recipes[i].ingredients}</p>
                     <p class="procedure">${state.recipes[i].procedure}</p>
                     <button class="delete-button">Delete</button>
                     <button class="edit-button">Edit</button>
-                    </section>
                 </div>
-                </div>
+            </section>
                 `);
         };
     };
-
-    //    
 })
+
+
+// --------------------- INDIVDUAL RECIPE CRUD ---------------------- //
+
+
+const handleRecipesSectionClick2 = (event) => {
+    event.preventDefault();
+    if (event.target.classList.contains('edit-button')) {
+        console.log(event.target);
+        editRecipe2(event);
+    };
+    if (event.target.classList.contains('delete-button')) {
+        console.log(event);
+        deleteRecipe2(event);
+    };
+    if (event.target.classList.contains('cancel-edit')) {
+        window.location.replace(`/recipes`);
+    };
+    if (event.target.classList.contains('submit-edit')) {
+        updateRecipe2(event);
+    };
+};
+
+const editRecipe2 = (event) => {
+    const recipeName = event.target.parentNode.children[0].innerText;
+    const recipeIngredients = event.target.parentNode.children[1].innerText;
+    const recipeProcedure = event.target.parentNode.children[2].innerText;
+    event.target.parentNode.innerHTML = `
+    <h4>Edit ${recipeName}</h4>
+    <form>
+        <div>
+            <label style="display:block;" for="recipeName">Recipe Name</label>
+            <input type="text" id="editRecipeName" name="name" value="${recipeName}"/>
+        </div>
+        <div>
+            <label style="display:block;" for="recipeIngredients">Recipe Ingredients</label>
+            <input type="text" id="editRecipeIngredients" name="ingredients" value="${recipeIngredients}"/>
+        </div>
+        <div>
+            <label style="display:block;" for="recipeProcedure">Recipe Procedure</label>
+            <input type="text" id="editRecipeProcedure" name="procedure" value="${recipeProcedure}"/>
+        </div>
+        <button type="button" class="cancel-edit">Cancel</button>
+        <button type="submit" class="submit-edit">Submit</button>
+    </form>
+    `;
+};
+
+const updateRecipe2 = (event) => {
+    const recipeId = event.target.parentNode.parentNode.id;
+    const recipeName = document.getElementById('editRecipeName').value;
+    const recipeIngredients = document.getElementById('editRecipeIngredients').value;
+    const recipeProcedure = document.getElementById('editRecipeProcedure').value;
+    const updatedRecipe = { name: recipeName, ingredients: recipeIngredients, procedure: recipeProcedure };
+    
+    fetch(`${BASE_URL}/${recipeId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedRecipe),
+    })
+        .then(res => res.json())
+        .then(() => {
+            window.location.replace(`/recipes`);
+        })
+        .catch((error) => console.log(error))
+}
+
+const deleteRecipe2 = (event) => {
+    const recipeId = event.target.parentNode.id;
+    console.log(recipeId);
+    fetch(`${BASE_URL}/${recipeId}`, {
+        method: 'delete'
+    })
+        .then((res) => res.json())
+        .then(() => {
+            window.location.replace(`/recipes`);
+        })
+        .catch((err) => console.log(err))
+};
+
+if (mainContainerR) {
+    mainContainerR.addEventListener('click', handleRecipesSectionClick2);
+}
