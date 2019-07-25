@@ -24,7 +24,9 @@ const recipesSection = document.getElementById('recipesSection');
 const recipesLibrary = document.getElementById('recipesLibrary');
 const recipeSection = document.getElementById('recipeSection');
 const $recipesLibrary = $('#recipesLibrary');
+const mainContainerR = document.getElementById('mainContainerR');
 const $mainContainerR = $('#mainContainerR');
+
 // const editBtns = document.getElementsByClassName('edit-btns');
 
 // ------------------- FUNCTIONS -------------------- //
@@ -226,9 +228,9 @@ if (recipesSection) {
     recipesSection.addEventListener('click', handleRecipesSectionClick);
 };
 
-// if (editBtns) {
-//     editBtns.addEventListener('click', handleRecipesSectionClick);
-// }
+if (mainContainerR) {
+    mainContainerR.addEventListener('click', handleRecipesSectionClick);
+}
 
 $recipesLibrary.on('click', '.individualRecipe', (e) => {
     const $recipeId = ($(e.target).parent().attr('id'));
@@ -239,14 +241,15 @@ $recipesLibrary.on('click', '.individualRecipe', (e) => {
             console.log(`Yay we found ${state.recipes[i].name}`);
             $mainContainerR.empty();
             $mainContainerR.append(`
-                <div id="${state.recipes[i]._id}">
+            <section id="recipesSection">    
+            <div id="${state.recipes[i]._id}">
                     <h4>${state.recipes[i].name}</h4>
                     <p class="ingredients">${state.recipes[i].ingredients}</p>
                     <p class="procedure">${state.recipes[i].procedure}</p>
-                    <section class="recipesSection">
                     <button class="delete-button">Delete</button>
                     <button class="edit-button">Edit</button>
                     </section>
+                </div>
                 </div>
                 `);
         };
