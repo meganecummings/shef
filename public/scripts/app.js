@@ -1,4 +1,5 @@
 console.log('Hey there!');
+console.log($);
 
 
 // ----------------- CONSTANT VARIABLES ------------------ //
@@ -22,7 +23,11 @@ const newRecipeForm = document.getElementById('newRecipeForm');
 const recipesSection = document.getElementById('recipesSection');
 const recipesLibrary = document.getElementById('recipesLibrary');
 const recipeSection = document.getElementById('recipeSection');
+const $recipesLibrary = $('#recipesLibrary');
+const mainContainerR = document.getElementById('mainContainerR');
+const $mainContainerR = $('#mainContainerR');
 
+// const editBtns = document.getElementsByClassName('edit-btns');
 
 // ------------------- FUNCTIONS -------------------- //
 
@@ -62,8 +67,8 @@ const recipeTemplate = (recipe) => {
 
 const libTemplate = (recipe) => {
     return `
-    <div id="${recipe._id}">
-        <a href="/recipe"><h4>${recipe.name}</h4></a>
+    <div id="${recipe._id}" class="individualRecipe">
+    <h4>${recipe.name}</h4>
     </div>
     `
 }
@@ -176,11 +181,12 @@ const updateRecipe = (event) => {
         },
         body: JSON.stringify(updatedRecipe),
     })
-    .then(res => res.json())
-    .then((data) => {
-        state.recipe = data.data;
-        render(state.recipes)})
-    .catch((error) => console.log(error))
+        .then(res => res.json())
+        .then((data) => {
+            state.recipe = data.data;
+            render(state.recipes)
+        })
+        .catch((error) => console.log(error))
 }
 
 
@@ -198,9 +204,11 @@ const deleteRecipe = (event) => {
 const handleRecipesSectionClick = (event) => {
     event.preventDefault();
     if (event.target.classList.contains('edit-button')) {
+        console.log(event);
         editRecipe(event);
     };
     if (event.target.classList.contains('delete-button')) {
+        console.log(event);
         deleteRecipe(event);
     };
     if (event.target.classList.contains('cancel-edit')) {
@@ -211,7 +219,6 @@ const handleRecipesSectionClick = (event) => {
     };
 };
 
-
 // ------------------- EVENT LISTENERS -------------------- //
 if (newRecipeForm) {
     newRecipeForm.addEventListener('submit', addNewRecipe);
@@ -220,3 +227,33 @@ if (newRecipeForm) {
 if (recipesSection) {
     recipesSection.addEventListener('click', handleRecipesSectionClick);
 };
+
+if (mainContainerR) {
+    mainContainerR.addEventListener('click', handleRecipesSectionClick);
+}
+
+$recipesLibrary.on('click', '.individualRecipe', (e) => {
+    const $recipeId = ($(e.target).parent().attr('id'));
+    // console.log($recipeId);
+    // console.log(state.recipes);
+    for (let i = 0; i < state.recipes.length; i++) {
+        if ($recipeId === state.recipes[i]._id) {
+            console.log(`Yay we found ${state.recipes[i].name}`);
+            $mainContainerR.empty();
+            $mainContainerR.append(`
+            <section id="recipesSection">    
+            <div id="${state.recipes[i]._id}">
+                    <h4>${state.recipes[i].name}</h4>
+                    <p class="ingredients">${state.recipes[i].ingredients}</p>
+                    <p class="procedure">${state.recipes[i].procedure}</p>
+                    <button class="delete-button">Delete</button>
+                    <button class="edit-button">Edit</button>
+                    </section>
+                </div>
+                </div>
+                `);
+        };
+    };
+
+    //    
+})
