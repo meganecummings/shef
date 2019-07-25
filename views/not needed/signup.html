@@ -17,11 +17,13 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-        <!-- Main CSS -->
+    <!-- Main CSS -->
     <link rel="stylesheet" href="/styles/styles.css">
+    <!-- JQUERY JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous" defer></script>
     <!-- Main JS -->
-    <script src="/scripts/app.js" defer>
-    </script>
+    <script src="/scripts/app.js" defer></script>
     <title>Shef</title>
 </head>
 
@@ -36,36 +38,51 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
+                    <li class="nav-item logged-in">
                         <a class="nav-link recipe" href="/recipes">Recipes</a>
                     </li>
-                    <li class="nav-item randomizer">
+                    <li class="nav-item randomizer logged-in">
                         <a class="nav-link" href="/random">Randomizer</a>
                     </li>
-                    <li class="nav-item newRecipe">
+                    <li class="nav-item newRecipe logged-in">
                         <a class="nav-link" href="/newrecipe">New Recipe</a>
                     </li>
-                    <li class="nav-item login">
+                    <li class="nav-item login not-logged-in">
                         <a class="nav-link" href="/login">Login</a>
                     </li>
-                    <li class="nav-item signUp">
+                    <li class="nav-item signUp not-logged-in">
                         <a class="nav-link" href="/signup">Sign Up</a>
                     </li>
                 </ul>
             </div>
         </nav>
     </header>
-    <main id="mainContainerNR">
-        <section>
-            <form id="newRecipeForm">
-                    <h1>New Recipe</h1>
-                <input type="text" id="name" name="name" placeholder="Name of Recipe" />
-                <input type="text" id="ingredients" name="ingredients" placeholder="Put your Ingredients here" />
-                <input type="text" id="procedure" name="procedure" placeholder="Put your Procedure here" />
-                <button type="submit" id="add-recipe-btn">Add Recipe</button>
-            </form>
+    <main>
+        <section class="signup">
+            <div class="container">
+                <h2>Sign Up</h2>
+                <form method="POST" action="/accounts/signup">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Name" />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" id="email" name="email" placeholder="Email" />
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Password" />
+                    </div>
+                    <div class="form-group">
+                        <label for="password2">Confirm Password</label>
+                        <input type="password" id="password2" name="password2" placeholder="Confirm Your Password" />
+                    </div>
+                    <input type="submit" value="Sign Me Up!" />
+                </form>
+
+            </div>
         </section>
-        <section id="recipesSection"></section>
     </main>
     <footer class="page-footer">
         <nav class="navbar navbar-expand-sm fixed-bottom footer">
