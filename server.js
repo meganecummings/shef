@@ -47,7 +47,7 @@ app.get('/recipe', (req, res) => {
 
 // Recipe Route
 // router.get('/:_id', ctrl.recipeCtrl.show);
-app.get('/recipe/:_id', (req, res) => {
+app.get('/recipes/:_id', (req, res) => {
     db.Recipe.findById(req.params._id, (err, foundRecipe) => {
         if (err) return res.status(400).json({
             status: 400,
