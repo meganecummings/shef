@@ -22,10 +22,11 @@ module.exports = {
     },
 
     show: (req, res) => {
-        db.Recipe.findOne(req.params.name, (err, foundRecipe) => {
+        db.Recipe.findById(req.params._id, (err, foundRecipe) => {
             if (err) return res.status(400).json({
                 status: 400,
-                message: 'Something went wrong, please try again',
+                message: 'Something went wrong, YOU GOOFED',
+                error: err,
             });
             res.status(200).json({
                 status: 200,
@@ -51,7 +52,7 @@ module.exports = {
     },
 
     update: (req, res) => {
-        db.Recipe.findOneAndUpdate(req.params.name, req.body, { new: true }, (err, updatedRecipe) => {
+        db.Recipe.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, updatedRecipe) => {
             console.log(req.body);
             if (err) return res.status(400).json({
                 status: 400,
