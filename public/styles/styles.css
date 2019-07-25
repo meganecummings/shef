@@ -62,7 +62,62 @@ body {
     margin: 0;
 } */
 
+/* MESSAGES */
 
-.active{
-    background-color: green;
+.alert.error:first-of-type {
+    margin: -30px auto 10px;
+}
+
+.alert.error {
+    background-color: #f8d7da;
+    max-width: 680px;
+    padding: 20px;
+    margin: 0 auto 10px;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    color: #721c24;
+}
+
+.alert .container {
+    margin: 0 auto;
+}
+
+/* Errors */
+
+.input-error {
+  background-color: #f5c6cb;
+  border: 2px solid #721c24;
+}
+
+  /* Nav */
+
+nav ul {
+    /* font-size: 0; */
+    float: right;
+}
+
+nav li {
+    list-style-type: none;
+    display: inline-block;
+    font-size: 1em;
+}
+
+nav li a {
+    display: block;
+    text-decoration: none;
+    padding: 20px 25px; 
+}
+
+li a:visited {
+  color: inherit;
+}
+
+li.active a, nav li:hover a {
+  text-decoration: none;
+  color: #ddd;
+  font-size: 1.2em;
+}
+
+.btn:hover {
+    size: 1.2em;
 }

@@ -8,28 +8,28 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                    <% if (typeof currentUser !== 'undefined') {%>
-                        <li class="nav-item"><a class="nav-link recipe" href="/profile">Profile</a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link recipe" href="/recipes">Recipes</a>
-                        </li>
-                        <li class="nav-item randomizer">
-                            <a class="nav-link" href="/random">Randomizer</a>
-                        </li>
-                        <li class="nav-item newRecipe">
-                            <a class="nav-link" href="/newrecipe">New Recipe</a>
-                        </li>
-                        <li class="nav-item logout">
-                                <a class="nav-link" href="/accounts/logout">Log Out</a>
-                            </li>
-                    <% } else { %>        
-                        <li class="nav-item login">
-                            <a class="nav-link" href="/login">Login</a>
-                        </li>
-                        <li class="nav-item signUp">
-                            <a class="nav-link" href="/signup">Sign Up</a>
-                        </li>
-                    <% }; %>
+                <% if (typeof currentUser !== 'undefined') {%>
+                <li class="nav-item"><a class="nav-link recipe" href="/profile">Profile</a>
+                </li>
+                <li class="nav-item"><a class="nav-link recipe" href="/recipes">Recipes</a>
+                </li>
+                <li class="nav-item randomizer">
+                    <a class="nav-link" href="/random">Randomizer</a>
+                </li>
+                <li class="nav-item newRecipe">
+                    <a class="nav-link" href="/newrecipe">New Recipe</a>
+                </li>
+                <li class="nav-item logout">
+                    <a class="nav-link" href="/accounts/logout">Log Out</a>
+                </li>
+                <% } else { %>
+                <li class="nav-item login">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+                <li class="nav-item signUp">
+                    <a class="nav-link" href="/signup">Sign Up</a>
+                </li>
+                <% }; %>
             </ul>
         </div>
     </nav>

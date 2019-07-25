@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const Recipe = require('./Recipe');
 
 const userSchema = new Schema({
   name: {
@@ -18,6 +19,7 @@ const userSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  recipes: [Recipe.schema]
 });
 
 const User = mongoose.model('User', userSchema);
