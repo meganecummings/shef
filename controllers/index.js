@@ -1,4 +1,6 @@
 module.exports = {
-    userCtrl: require('./userCtrl'),
+    usersCtrl: require('./usersCtrl'),
     recipeCtrl: require('./recipeCtrl'),
+    accountsCtrl: require('./accountsCtrl'), 
+    profileCtrl: require('./profileCtrl')
 }

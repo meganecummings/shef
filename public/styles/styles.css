@@ -4,6 +4,7 @@
 
 body {
     min-width: 1080px;
+    margin-top: 5em;
 }
 
 .navbar, .navbar-bottom {

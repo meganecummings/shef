@@ -3,6 +3,11 @@ console.log('Chef, enter your recipe')
 // ----------------- CONSTANT VARIABLES ------------------ //
 const BASE_URL = ('/api/newrecipe');
 const LIB_URL = ('/api/recipes');
+const navLinks = document.querySelectorAll('nav li');
+const form = document.querySelector('form');
+
+
+
 
 // ------------------- GLOBAL VARIABLES -------------------- //
 
@@ -46,6 +51,14 @@ const renderLib = () => {
     });
 }
 
+// ADD NAV ACTIVE CLASS
+// navLinks.forEach(link => {
+//     console.log(link.firstChild)
+//     console.log(navLinks)
+//     if (window.location.pathname === link.firstChild.getAttribute('href')) {
+//         link.classList.add('active');
+//     }
+// })
 
 const recipeTemplate = (recipe) => {
     console.log(recipe);
@@ -332,3 +345,45 @@ const deleteRecipe2 = (event) => {
 if (mainContainerR) {
     mainContainerR.addEventListener('click', handleRecipesSectionClick2);
 }
+
+//ADD ERROR MESSAGES ON SUBMIT
+form && form.addEventListener('submit', (e) => {
+    [...document.querySelectorAll(`.alert`)].forEach(alert => {
+        alert.parentNode.removeChild(alert);
+    });
+    // e.preventDefault();
+    // const formInputs = [...form.elements];
+    // console.log(formInputs);
+    [...form.elements].forEach(input => {
+        if (input.type !== 'submit' && input.value === '') {
+            // console.log('click')
+            e.preventDefault();
+            input.classList.add('input-error');
+            input.insertAdjacentHTML('afterend', `
+                <div class="alert alert-${input.id}">
+                    Please Enter ${input.placeholder}
+                </div>
+            `);
+        }
+    });
+});
+
+//VALIDATE FORM INPUT ON BLUR
+document.addEventListener('blur', (e) => {
+    if (e.target.value === '') {
+        e.target.classList.add('input-error');
+        e.target.insertAdjacentHTML('afterend', `
+                <div class="alert alert-${e.target.id}">
+                    Please Enter ${e.target.placeholder}
+                </div>
+            `);
+    }
+}, true);
+
+
+// CLEAR FORM ERRORS ON FOCUS
+document.addEventListener('focus', (e) => {
+    e.target.classList.remove('input-error');
+    const inputMessage = document.querySelector(`.alert-${e.target.id}`);
+    inputMessage && inputMessage.parentNode.removeChild(inputMessage);
+}, true)
