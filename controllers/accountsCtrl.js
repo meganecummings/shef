@@ -73,9 +73,10 @@ const createSession = (req, res) => {
     bcrypt.compare(req.body.password, foundUser.password, (err, isMatch) => {
       if (err) return res.render('accounts/login', { errors: [{ message: 'Something went wrong, please try again.'}] });
 
+      console.log(foundUser)
       if (isMatch) {
         req.session.currentUser = { _id: foundUser._id, name: foundUser.name, email: foundUser.email };
-        return res.redirect('/homepage/homepage');
+        return res.redirect('/profile');
       } else {
         return res.render('accounts/login', { errors: [{ message: 'User or password is incorrect.'}] })
       }
@@ -85,7 +86,7 @@ const createSession = (req, res) => {
 
 const deleteSession = (req, res) => {
   req.session.destroy((err) => {
-    if (err) return res.render('/profile', { errors: [{ message: 'Something went wrong, please try again.'}] });
+    if (err) return res.render('homepage/show', { errors: [{ message: 'Something went wrong, please try again.'}] });
   }) 
   res.redirect('/accounts/login');
 }

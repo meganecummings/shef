@@ -7,8 +7,6 @@ const navLinks = document.querySelectorAll('nav li');
 const form = document.querySelector('form');
 
 
-
-
 // ------------------- GLOBAL VARIABLES -------------------- //
 
 // ------------------- STATE VARIABLES -------------------- //
@@ -51,10 +49,10 @@ const renderLib = () => {
     });
 }
 
-// ADD NAV ACTIVE CLASS
+// // ADD NAV ACTIVE CLASS
 // navLinks.forEach(link => {
-//     console.log(link.firstChild)
-//     console.log(navLinks)
+//     // console.log(link.firstChild.getAttribute('href'));
+//     // console.log(window.location.pathname);
 //     if (window.location.pathname === link.firstChild.getAttribute('href')) {
 //         link.classList.add('active');
 //     }
@@ -368,22 +366,22 @@ form && form.addEventListener('submit', (e) => {
     });
 });
 
-//VALIDATE FORM INPUT ON BLUR
-document.addEventListener('blur', (e) => {
-    if (e.target.value === '') {
-        e.target.classList.add('input-error');
-        e.target.insertAdjacentHTML('afterend', `
-                <div class="alert alert-${e.target.id}">
-                    Please Enter ${e.target.placeholder}
-                </div>
-            `);
-    }
-}, true);
+// //VALIDATE FORM INPUT ON BLUR
+// document.addEventListener('blur', (e) => {
+//     if (e.target.value === '') {
+//         e.target.classList.add('input-error');
+//         e.target.insertAdjacentHTML('afterend', `
+//                 <div class="alert alert-${e.target.id}">
+//                     Please Enter ${e.target.placeholder}
+//                 </div>
+//             `);
+//     }
+// }, true);
 
 
-// CLEAR FORM ERRORS ON FOCUS
-document.addEventListener('focus', (e) => {
-    e.target.classList.remove('input-error');
-    const inputMessage = document.querySelector(`.alert-${e.target.id}`);
-    inputMessage && inputMessage.parentNode.removeChild(inputMessage);
-}, true)
+// // CLEAR FORM ERRORS ON FOCUS
+// document.addEventListener('focus', (e) => {
+//     e.target.classList.remove('input-error');
+//     const inputMessage = document.querySelector(`.alert-${e.target.id}`);
+//     inputMessage && inputMessage.parentNode.removeChild(inputMessage);
+// }, true)
