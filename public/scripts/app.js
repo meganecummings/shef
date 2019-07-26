@@ -51,8 +51,8 @@ const renderLib = () => {
 
 const recipeTemplate = (recipe) => {
     return `
-    <div class="card" id="${recipe._id}">
-        <div class="card-main2">
+    <div class="card-main2" id="${recipe._id}">
+        <div class="card-main">
             <h2>${recipe.name}</h2>
             <p class="ingredients">${recipe.ingredients}</p>
             <p class="procedure">${recipe.procedure}</p>
