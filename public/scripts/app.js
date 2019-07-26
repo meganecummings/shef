@@ -65,7 +65,7 @@ const recipeTemplate = (recipe) => {
 
 const libTemplate = (recipe) => {
     return `
-    <div class="kard individualRecipe" id="${recipe._id}">
+    <div class="kard card individualRecipe" id="${recipe._id}">
         <div class="img-container">
             <img src="${recipe.image}" class="kard-img" name="image" alt="${recipe.name} Image"/>
         </div>
