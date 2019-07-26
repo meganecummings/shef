@@ -25,16 +25,6 @@ app.use(session({
     saveUninitialized: false,
 }))
 
-//enables cors
-app.use(cors({
-    'allowedHeaders': ['sessionId', 'Content-Type'],
-    'exposedHeaders': ['sessionId'],
-    'origin': '*',
-    'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    'preflightContinue': false
-}));
-
-
 // own middleware
 app.use((req, res, next) => {
     next();
@@ -74,11 +64,16 @@ app.get('/newrecipe', (req, res) => {
     res.render('profile/newrecipe', { currentUser: req.session.currentUser });
 });
 
+// Profiles Route
+app.use('/profile', routes.profile);
+
+// Accounts Route
+app.use('/accounts', routes.accounts);
+
 // Recipe(s) Route
 app.get('/recipe', (req, res) => {
     res.render('profile/recipe', { currentUser: req.session.currentUser });
 });
-
 
 // Recipe(s) Route
 app.get('/recipes', (req, res) => {
@@ -149,12 +144,6 @@ app.put('/api/newrecipe/:_id', (req, res) => {
         });
     });
 });
-
-// Profiles Route
-app.use('/profile', routes.profile);
-
-// Accounts Route
-app.use('/accounts', routes.accounts);
 
 // API Routing 
 // Recipe Routing
