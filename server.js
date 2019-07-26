@@ -2,7 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
-
+var cors = require('cors');
 
 // ------------------- INSTANCED MODULES -------------------- //
 const app = express();
@@ -21,15 +21,26 @@ function getTime() {
 //Express Sessions
 app.use(session({
     secret: 'This secret can be anything you want. It is used to encrpyt the session object',
-    resave: false, 
+    resave: false,
     saveUninitialized: false,
-  }))
+}))
+
+//enables cors
+app.use(cors({
+    'allowedHeaders': ['sessionId', 'Content-Type'],
+    'exposedHeaders': ['sessionId'],
+    'origin': '*',
+    'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    'preflightContinue': false
+}));
+
+require('./router/index')(app);
 
 // own middleware
 app.use((req, res, next) => {
     console.log('REQ Session = ', req.session);
     next();
-  })
+})
 
 // BodyParser Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -63,19 +74,19 @@ app.get('/login', (req, res) => {
 
 // New Recipe Route
 app.get('/newrecipe', (req, res) => {
-    res.render('profile/newrecipe', {currentUser: req.session.currentUser});
+    res.render('profile/newrecipe', { currentUser: req.session.currentUser });
 });
 
 // Recipe(s) Route
 app.get('/recipe', (req, res) => {
-    res.render('profile/recipe', {currentUser: req.session.currentUser});
+    res.render('profile/recipe', { currentUser: req.session.currentUser });
     // res.sendFile(`${__dirname}/views/recipes.html`);
 });
 
 
 // Recipe(s) Route
 app.get('/recipes', (req, res) => {
-    res.render('profile/recipes', {currentUser: req.session.currentUser});
+    res.render('profile/recipes', { currentUser: req.session.currentUser });
     // res.sendFile(`${__dirname}/views/recipes.html`);
 });
 
@@ -158,10 +169,10 @@ app.use('/api/recipes', routes.recipes);
 //Users Routing
 app.get('/api/v1/users', (req, res) => {
     db.User.find({}, (err, allUsers) => {
-      if (err) return res.json({ status: 400, error: err });
-      res.json({ status: 200, data: allUsers });
+        if (err) return res.json({ status: 400, error: err });
+        res.json({ status: 200, data: allUsers });
     });
-  });
+});
 
 // ------------------- SERVER LISTENERS -------------------- //
 

@@ -54,7 +54,7 @@ const recipeTemplate = (recipe) => {
     <h4>${recipe.name}</h4>
     <p class="ingredients">${recipe.ingredients}</p>
     <p class="procedure">${recipe.procedure}</p>
-    <img src="${recipe.image}" id="editRecipeImage" name="image" alt="${recipe.name} Image"/>
+    <img src="${recipe.image}" class="image" id="${recipe._id}/image" name="image" alt="${recipe.name} Image"/>
     <button class="delete-button">Delete</button>
     <button class="edit-button">Edit</button>
     </div>
@@ -65,7 +65,7 @@ const libTemplate = (recipe) => {
     return `
     <div id="${recipe._id}" class="individualRecipe">
     <h4>${recipe.name}</h4>
-    <img src="${recipe.image}" id="editRecipeImage" name="image" alt="${recipe.name} Image"/>
+    <img src="${recipe.image}" id="${recipe._id}/image" name="image" alt="${recipe.name} Image"/>
     </div>
     `
 }
@@ -164,8 +164,8 @@ const editRecipe = (event) => {
                 <input type="text" id="editRecipeProcedure" name="procedure" value="${recipeProcedure}"/>
             </div>
             <div>
-            <label style="display:block;" for="recipeImg">Recipe Image</label>
-            <img src="${recipeImg}" id="editRecipeImg" name="img" alt="${recipeName} Image"/>
+            <label style="display:block;" for="recipeImage">Recipe Image</label>
+            <img src="${recipeImage}" id="${recipe._id}/image" name="image" alt="${recipeName} Image"/>
             </div>
             <button type="button" class="cancel-edit">Cancel</button>
             <button type="submit" class="submit-edit">Submit</button>
@@ -178,8 +178,8 @@ const updateRecipe = (event) => {
     const recipeName = document.getElementById('editRecipeName').value;
     const recipeIngredients = document.getElementById('editRecipeIngredients').value;
     const recipeProcedure = document.getElementById('editRecipeProcedure').value;
-    const recipeImg = document.getElementById('editRecipeImg').value;
-    const updatedRecipe = { name: recipeName, ingredients: recipeIngredients, procedure: recipeProcedure, img: recipeImg };
+    const recipeImage = document.getElementById('editRecipeImage').value;
+    const updatedRecipe = { name: recipeName, ingredients: recipeIngredients, procedure: recipeProcedure, image: recipeImage };
     console.log(recipeId);
     fetch(`${BASE_URL}/${recipeId}`, {
             method: 'PUT',
@@ -250,7 +250,7 @@ $recipesLibrary.on('click', '.individualRecipe', (e) => {
                     <h4>${state.recipes[i].name}</h4>
                     <p class="ingredients">${state.recipes[i].ingredients}</p>
                     <p class="procedure">${state.recipes[i].procedure}</p>
-                    <img src="${state.recipes[i].img}" id="editRecipeImg" name="img" alt="${recipeName} Image"/>
+                    <img src="${state.recipes[i].image}" id="${state.recipes[i]._id}/image" name="image" alt="${state.recipes[i].name} Image"/>
                     <button class="delete-button">Delete</button>
                     <button class="edit-button">Edit</button>
                 </div>
@@ -286,7 +286,7 @@ const editRecipe2 = (event) => {
     const recipeName = event.target.parentNode.children[0].innerText;
     const recipeIngredients = event.target.parentNode.children[1].innerText;
     const recipeProcedure = event.target.parentNode.children[2].innerText;
-    const recipeImg = event.target.parentNode.children[3].innerText;
+    const recipeImage = event.target.parentNode.children[3].innerText;
 
     event.target.parentNode.innerHTML = `
     <h4>Edit ${recipeName}</h4>
@@ -304,8 +304,8 @@ const editRecipe2 = (event) => {
             <input type="text" id="editRecipeProcedure" name="procedure" value="${recipeProcedure}"/>
         </div>
         <div>
-        <label style="display:block;" for="recipeImg">Recipe Image</label>
-        <img src="${recipeImg}" id="editRecipeImg" name="img" alt="${recipeName} Image"/>
+        <label style="display:block;" for="recipeImage">Recipe Image</label>
+        <img src="${recipeImage}" id="${recipe._id}/image" name="image" alt="${recipeName} Image"/>
     </div>
         <button type="button" class="cancel-edit">Cancel</button>
         <button type="submit" class="submit-edit">Submit</button>
@@ -318,9 +318,9 @@ const updateRecipe2 = (event) => {
     const recipeName = document.getElementById('editRecipeName').value;
     const recipeIngredients = document.getElementById('editRecipeIngredients').value;
     const recipeProcedure = document.getElementById('editRecipeProcedure').value;
-    const recipeImg = document.getElementById('editRecipeImg').value;
+    const recipeImage = document.getElementById('editRecipeImage').value;
 
-    const updatedRecipe = { name: recipeName, ingredients: recipeIngredients, procedure: recipeProcedure, img: recipeImg };
+    const updatedRecipe = { name: recipeName, ingredients: recipeIngredients, procedure: recipeProcedure, image: recipeImage };
 
     fetch(`${BASE_URL}/${recipeId}`, {
             method: 'PUT',

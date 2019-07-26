@@ -4,6 +4,8 @@
 
 body {
     min-width: 1080px;
+    width: 100vw;
+    height: 100vh;
     margin-top: 5vw;
     margin-left: 3vw;
 }
