@@ -19,11 +19,6 @@ body {
     background-color: rgba(255, 255, 255, 0.8);
 }
 
-.login-section,
-.signup-section {
-    margin-top: 10vh;
-}
-
 h4 {
     margin-top: 10vh;
 }
@@ -50,9 +45,11 @@ h4 {
 .hero-image2 {
     width: 100vw;
     height: 100vh;
-    object-fit: contain;
+    object-fit: cover;
     position: absolute;
     z-index: -1;
+    top: 0;
+    left: 0;
 }
 
 .hero-image2 img {
@@ -128,7 +125,6 @@ h1 {
     margin: 0 auto;
 }
 
-
 /* Errors */
 
 .input-error {
@@ -154,7 +150,6 @@ h1 {
     font-weight: 900;
     text-transform: uppercase;
     padding: 0;
-    color:white;
     text-shadow: 0px 0px 10px white, 0px 0px 1px black;
     font-size: 2em;
     background: rgb(255, 255, 255, 0.8);
@@ -192,6 +187,10 @@ li.active a, nav li:hover a {
     border-radius: 5%;
 }
 
+.login-section, .signup, .newrecipe-form{
+    margin-top: 20vh;
+}
+
 .form-style{
 	max-width: 400px;
 	padding: 16px;
@@ -200,6 +199,7 @@ li.active a, nav li:hover a {
     position: relative;
     text-align: center;
 }
+
 .form-style h1{
 	background:linear-gradient(to bottom, rgba(231, 249, 250, 0.5), rgba(202, 238, 222, 0.5));
 	font-size: 140%;
@@ -220,7 +220,7 @@ li.active a, nav li:hover a {
 	margin-bottom: 4%;
 	border: 1px solid #ccc;
 	padding: 3%;
-	color: #555;
+	color: rgba(92, 91, 91, .9);
 }
 .form-style input[type="text"]:focus,
 .form-style input[type="email"]:focus,
@@ -240,11 +240,6 @@ li.active a, nav li:hover a {
 nav li:hover a {
     text-decoration: none;
     color: #ddd;
-    font-size: 1.2em;
-}
-
-.btn:hover {
-    size: 1.2em;
 }
 
 /* Recipe Cards */
