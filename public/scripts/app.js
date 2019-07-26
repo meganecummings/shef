@@ -151,12 +151,11 @@ const newRecipeError = (error) => {
 };
 
 const editRecipe = (event) => {
-    console.log(event);
     const recipeName = event.target.parentNode.children[0].innerText;
     const recipeIngredients =
         event.target.parentNode.children[1].innerText;
     const recipeProcedure = event.target.parentNode.children[2].innerText;
-    const recipeImage = event.target.parentNode.children[3].innerText;
+    const recipeImage = event.target.parentNode.children[3].src;
     event.target.parentNode.innerHTML = `
     <div class="form-style">
         <h1>Edit ${recipeName}</h1>
@@ -165,8 +164,7 @@ const editRecipe = (event) => {
             <input type="text" id="editRecipeIngredients" name="ingredients" value="${recipeIngredients}" />
             <input type="text" id="editRecipeProcedure" name="procedure" value="${recipeProcedure}" />
             <div>
-              <label for="recipeImage">Recipe Image</label>
-            <img src="${recipeImage}" id="${recipe._id}/image" name="image" alt="${recipeName} Image"/>
+            <input type="text" id="editRecipeImage" name="image" value="${recipeImage}" />
             </div>
             <button type="button" class="cancel-edit btn">Cancel</button>
             <button type="submit" class="submit-edit btn">Submit</button>
@@ -288,8 +286,7 @@ const editRecipe2 = (event) => {
     const recipeIngredients = event.target.parentNode.children[1].innerText;
     const recipeProcedure = event.target.parentNode.children[2].innerText;
     const recipeImage = event.target.parentNode.children[3].src;
-
-    console.log(recipeImage);
+    console.log(recipeProcedure);
     event.target.parentNode.innerHTML = `
     <div class="form-style">
     <h1>Edit ${recipeName}</h1>
@@ -297,7 +294,6 @@ const editRecipe2 = (event) => {
             <input type="text" id="editRecipeName" name="name" value="${recipeName}" />
             <input type="text" id="editRecipeIngredients" name="ingredients" value="${recipeIngredients}" />
             <input type="text" id="editRecipeProcedure" name="procedure" value="${recipeProcedure}" />
-            <label for="recipeImage">Recipe Image</label>
             <input type="text" id="editRecipeImage" name="image" value="${recipeImage}"/>
             <button type="button" class="cancel-edit btn">Cancel</button>
             <button type="submit" class="submit-edit btn">Submit</button>
