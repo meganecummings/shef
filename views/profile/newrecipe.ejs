@@ -1,18 +1,24 @@
 <% include ../partials/_head.ejs %>
 
-    <main id="mainContainerNR">
-        <section>
-            <form id="newRecipeForm">
-                <h1>New Recipe</h1>
-                <p> We'd love for you to add your flavor to the mix. Input your favorite recipes below! </p>
-                <input type="text" id="name" name="name" placeholder="Name of Recipe" />
-                <input type="text" id="ingredients" name="ingredients" placeholder="Put your Ingredients here" />
-                <input type="text" id="procedure" name="procedure" placeholder="Put your Procedure here" />
-                <input type="text" id="image" name="image" placeholder="Put your Image URL here" />
-                <button type="submit" id="add-recipe-btn">Add Recipe</button>
-            </form>
+<main>
+    <section>
+        <img src="/assets/body.jpg" alt="table" class="hero-image2">
+        <section id="newrecipe-container">
+            <div class="/assets/body.jpg" class="hero-image2" alt="table">
+                <section class="newrecipe-form">
+                    <form id="newRecipeForm" class="form-style">
+                        <h2>New Recipe</h2>
+                        <input type="text" id="name" name="name" placeholder="Recipe Name" />
+                        <textarea type="text" id="ingredients" name="ingredients" placeholder="Ingredients"
+                            wrap="hard"></textarea>
+                        <textarea type="text" id="procedure" name="procedure" placeholder="Procedure"></textarea>
+                        <input type="text" id="image" name="image" placeholder="Put your Image URL here" />
+                        <button type="submit" id="add-recipe-btn" class="btn">Add Recipe</button>
+                    </form>
+            </div>
+            <section id="recipesSection"></section>
         </section>
-        <section id="recipesSection"></section>
-    </main>
+    </section>
+</main>
 
-    <% include ../partials/_footer.ejs %>
+<% include ../partials/_footer.ejs %>

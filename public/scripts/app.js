@@ -24,6 +24,7 @@ const recipeSection = document.getElementById('recipeSection');
 const $recipesLibrary = $('#recipesLibrary');
 const mainContainerR = document.getElementById('mainContainerR');
 const $mainContainerR = $('#mainContainerR');
+const ingredientList = document.getElementsByClassName('ingredientList');
 const card = document.getElementsByClassName('card');
 
 // ------------------- FUNCTIONS -------------------- //
@@ -59,9 +60,9 @@ const recipeTemplate = (recipe) => {
             <div class="card-header">${recipe.name}</div>
             <p class="ingredients">${recipe.ingredients}</p>
             <p class="procedure">${recipe.procedure}</p>
+            <button class="delete-button btn">Delete</button>
+            <button class="edit-button btn">Edit</button>
         </div>
-        <button class="delete-button">Delete</button>
-        <button class="edit-button">Edit</button>
     </div>
     `
 }
@@ -157,29 +158,25 @@ const editRecipe = (event) => {
     const recipeProcedure = event.target.parentNode.children[2].innerText;
     const recipeImage = event.target.parentNode.children[3].innerText;
     event.target.parentNode.innerHTML = `
-    <h4>Edit ${recipeName}</h4>
+    <div class="form-style">
+        <h1>Edit ${recipeName}</h1>
         <form>
+            <input type="text" id="editRecipeName" name="name" value="${recipeName}" />
+            <input type="text" id="editRecipeIngredients" name="ingredients" value="${recipeIngredients}" />
+            <input type="text" id="editRecipeProcedure" name="procedure" value="${recipeProcedure}" />
             <div>
-                <label for="recipeName">Recipe Name</label>
-                <input type="text" id="editRecipeName" name="name" value="${recipeName}"/>
-            </div>
-            <div>
-                <label for="recipeIngredients">Recipe Ingredients</label>
-                <input type="text" id="editRecipeIngredients" name="ingredients" value="${recipeIngredients}"/>
-            </div>
-            <div>
-                <label for="recipeProcedure">Recipe Procedure</label>
-                <input type="text" id="editRecipeProcedure" name="procedure" value="${recipeProcedure}"/>
-            </div>
-            <div>
-            <label for="recipeImage">Recipe Image</label>
+              <label for="recipeImage">Recipe Image</label>
             <img src="${recipeImage}" id="${recipe._id}/image" name="image" alt="${recipeName} Image"/>
             </div>
-            <button type="button" class="cancel-edit">Cancel</button>
-            <button type="submit" class="submit-edit">Submit</button>
+            <button type="button" class="cancel-edit btn">Cancel</button>
+            <button type="submit" class="submit-edit btn">Submit</button>
         </form>
-    `;
+    </div>
+    `
 };
+
+
+
 
 const updateRecipe = (event) => {
     const recipeId = event.target.parentNode.parentNode.id;
@@ -251,19 +248,16 @@ $recipesLibrary.on('click', '.individualRecipe', (e) => {
             <section id="recipesSection">    
                 <div id="${state.recipes[i]._id}">
                     <h4>${state.recipes[i].name}</h4>
-
                     <h6>Ingredients</h6>
                     <p class="ingredients">${state.recipes[i].ingredients}</p>
-
                     <h6>Procedure</h6>
                     <p class="procedure">${state.recipes[i].procedure}</p>
                     <img src="${state.recipes[i].image}" id="${state.recipes[i]._id}/image" name="image" alt="${state.recipes[i].name} Image"/>
-                    
-                    <button class="delete-button">Delete</button>
-                    <button class="edit-button">Edit</button>
+                    <button class="delete-button btn">Delete</button>
+                    <button class="edit-button btn">Edit</button>
                 </div>
             </section>
-                `);
+           `);
         };
     };
 })
@@ -297,27 +291,18 @@ const editRecipe2 = (event) => {
 
     console.log(recipeImage);
     event.target.parentNode.innerHTML = `
-    <h4>Edit ${recipeName}</h4>
-    <form>
-        <div>
-            <label for="recipeName">Recipe Name</label>
-            <input type="text" id="editRecipeName" name="name" value="${recipeName}"/>
-        </div>
-        <div>
-            <label for="recipeIngredients">Recipe Ingredients</label>
-            <input type="text" id="editRecipeIngredients" name="ingredients" value="${recipeIngredients}"/>
-        </div>
-        <div>
-            <label for="recipeProcedure">Recipe Procedure</label>
-            <input type="text" id="editRecipeProcedure" name="procedure" value="${recipeProcedure}"/>
-        </div>
-        <div>
-        <label for="recipeImage">Recipe Image</label>
-        <input type="text" id="editRecipeImage" name="image" value="${recipeImage}"/>
+    <div class="form-style">
+    <h1>Edit ${recipeName}</h1>
+        <form>
+            <input type="text" id="editRecipeName" name="name" value="${recipeName}" />
+            <input type="text" id="editRecipeIngredients" name="ingredients" value="${recipeIngredients}" />
+            <input type="text" id="editRecipeProcedure" name="procedure" value="${recipeProcedure}" />
+            <label for="recipeImage">Recipe Image</label>
+            <input type="text" id="editRecipeImage" name="image" value="${recipeImage}"/>
+            <button type="button" class="cancel-edit btn">Cancel</button>
+            <button type="submit" class="submit-edit btn">Submit</button>
+        </form>
     </div>
-        <button type="button" class="cancel-edit">Cancel</button>
-        <button type="submit" class="submit-edit">Submit</button>
-    </form>
     `;
 };
 
