@@ -285,8 +285,8 @@ const editRecipe2 = (event) => {
     const recipeName = event.target.parentNode.children[0].innerText;
     const recipeIngredients = event.target.parentNode.children[1].innerText;
     const recipeProcedure = event.target.parentNode.children[2].innerText;
-    const recipeImage = event.target.parentNode.children[3].src;
-    console.log(recipeProcedure);
+    const recipeImage = event.target.parentNode.children[5].src;
+    console.log(event.target.parentNode.children[5]);
     event.target.parentNode.innerHTML = `
     <div class="form-style">
     <h1>Edit ${recipeName}</h1>
