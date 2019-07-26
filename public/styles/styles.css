@@ -132,12 +132,12 @@ h1 {
 .alert.error {
     background-color: #f8d7da;
     max-width: 680px;
-    padding: 20px;
-    margin: 10px auto 10px;
+    margin: 90px auto 10px;
     border: 1px solid #f5c6cb;
     border-radius: 4px;
     color: #721c24;
     display: block;
+    z-index: 10;
 }
 
 .alert .container {
@@ -211,7 +211,7 @@ nav li:hover a {
 .login-section,
 .signup,
 .newrecipe-form {
-    margin-top: 20vh;
+    margin-top: 15vh;
 }
 
 .form-style {
