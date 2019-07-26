@@ -2,6 +2,6 @@ const express = require('express');
 const router = express.Router();
 const ctrl = require('../controllers');
 
-router.post('/', ctrl.recipeCtrl.new);
+router.get('/', ctrl.profileCtrl.showProfile);
 
 module.exports = router;
