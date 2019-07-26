@@ -107,6 +107,7 @@ h1 {
 #newrecipe-container{
     display:flex;
     flex-wrap: wrap;
+    margin: auto auto;
 }
 
 /* #recipesSection {
@@ -196,8 +197,13 @@ li.active a, nav li:hover a {
     border-radius: 5%;
 }
 
-.login-section, .signup, .newrecipe-form{
+.login-section, .signup {
     margin-top: 20vh;
+}
+
+.newrecipe-form {
+    padding-top: 2em;
+    margin: 10vh 10vw;
 }
 
 .form-style{
@@ -259,45 +265,74 @@ nav li:hover a {
 }
 
 .card {
-    height: 40vh;
+    /* width: 300px;
+    height: 200px;
+
+	padding: 16px;
+    background: rgb(247, 247, 247, 0.7);
+    margin: 20px auto;
+    position: relative;
+    text-align: center; */
+
+    /* height: 40vh;
     margin: 2em 1em;
     padding: 1em;
-    width: 33%;
+    width: 200px;
     display: inline-block;
     overflow: hidden;
-    box-shadow: inset 0 0 0 0 rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 0 0 0 rgba(0, 0, 0, 0.2); */
 }
 
-.card:hover {
+/* .card:hover {
     transform: scaleY(1.1);
     z-index: 5;
-}
+} */
 
 .img-container {
     position: relative;
     height: 100%;
     object-fit: cover;
 }
+.card-main {
+    width: 45vh;
+    height: 30vh;
+    margin-top: 15em;
+    background: rgb(247, 247, 247, 0.7);
+    position: relative;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
 
-.card-img {
+.card-main p {
+    background:white;
+    margin: 3% 10%;
+    padding: 3%;
+    overflow: hidden;
+    max-height: 4em;
+}
+.card-main h1 {
+    padding: 3%;
+}
+/* .card-img {
     position: absolute;
     width: 100%;
     object-fit: cover;
     max-height: 100%;
-}
+} */
 
-.card-header {
+/* .card-header {
     font-size: 2em;
     font-weight: bold;
     text-align: center;
-    z-index: 5;
     background-color: rgba(212, 230, 176, 0.9);
     position: absolute;
     align-content: center;
     top: 0;
     left: 0;
     right: 0;
-}
+} */
 
 
 /* Media Queries */
