@@ -1,23 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Darker+Grotesque:400,600,900&display=swap');
+
 * {
     box-sizing: border-box;
 }
 
 body {
-    min-width: 1080px;
-    margin-top: 5em;
-}
-
-.navbar, .navbar-bottom {
-    background-color: rgba(255,255,255,0.8);
-}
-
-.navbar-brand, .nav-link {
-    color: black;
-}
-
-.background-container {
-    position: relative;
-    width: 100%;
+    font-family: 'Darker Grotesque', sans-serif;
+    color:black;
 }
 
 #hero-image {
@@ -28,9 +17,17 @@ body {
     z-index: -1;
 }
 
+#hero-image2 {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    position: absolute;
+    z-index: -1;
+}
+
 #jumbotron-container {
     position: relative;
-    height: 100vh;
+    padding-top: 5em;
 }
 
 #jumbotron {
@@ -40,27 +37,37 @@ body {
     right: 5vw;
 }
 
-.btn-start {
-    background-color: rgba(212, 230, 176, 0.8);
+h1 {
+    font-weight: 600;
 }
 
-.nav-item-footer {
-    margin-left: 2em;
+.btn {
+    background:linear-gradient(to bottom, rgba(231, 249, 250, 0.5), rgba(202, 238, 222, 0.5));
+	border-radius:6px;
+	border:1px solid rgba(255, 255, 255, 0.906);
+	display:inline-block;
+	color:#000000;
+	padding:6px 24px;
+	text-decoration:none;
+    text-shadow:0px 1px 0px #ced9bf;
+    width: 6em;
+    font-weight: 600;
+    margin: 0 1em;
 }
-
-#newRecipeForm {
-    padding: 5em;
+.btn:hover {
+    box-shadow:inset 0px 0px 14px -3px rgba(223, 233, 220, 0.938);
+	background-color:rgb(226,234,240, 0.6);
+    background-color:#b6d1a3;
+    color: black;
+}
+.btn:active {
+	position:relative;
+	top:1px;
 }
 
 .recipesContainer {
     margin: 5em;
 }
-
-/* 
-.icon-img {
-    padding: 0;
-    margin: 0;
-} */
 
 /* MESSAGES */
 
@@ -91,21 +98,48 @@ body {
 
   /* Nav */
 
-nav ul {
-    /* font-size: 0; */
-    float: right;
+.navbar {
+    background-color:  rgba(226,234,240, 0.6);
+    height: 5.4em;
+}
+
+#footer {
+    background-color:  rgba(226,234,240, 0.6);
+    height: 2.5em;
+    display: inline;
+}
+
+.navbar-brand {
+    font-weight: 900;
+    text-transform: uppercase;
+    padding: 0;
+    color:white;
+    text-shadow: 0px 0px 10px white, 0px 0px 1px black;
+    font-size: 2em;
+    background: rgb(255, 255, 255, 0.8);
+    border-radius: 25% 10%;
+} 
+
+.nav-link {
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 0;
+    text-shadow: 0px 0px 10px white, 0px 0px 1px black;
+    font-size: 1.5em;
 }
 
 nav li {
     list-style-type: none;
     display: inline-block;
-    font-size: 1em;
 }
 
 nav li a {
     display: block;
     text-decoration: none;
-    padding: 20px 25px; 
+}
+
+.nav-item-footer {
+    margin-left: 2em;
 }
 
 li a:visited {
@@ -113,11 +147,45 @@ li a:visited {
 }
 
 li.active a, nav li:hover a {
-  text-decoration: none;
-  color: #ddd;
-  font-size: 1.2em;
+    background: rgb(255, 255, 255, 0.8);
+    border-radius: 5%;
 }
 
-.btn:hover {
-    size: 1.2em;
+
+/*  */
+
+.form-style-6{
+	max-width: 400px;
+    margin: 7em auto 0 auto;
+	padding: 16px;
+	background: #F7F7F7;
+}
+.form-style-6 h1{
+	background: #43D1AF;
+	font-size: 140%;
+	font-weight: 300;
+	text-align: center;
+	color: #fff;
+	margin: -16px -16px 16px -16px;
+}
+
+.form-style-6 input[type="text"],
+.form-style-6 textarea,
+.form-style-6 select 
+{
+	outline: none;
+	width: 100%;
+	background: #fff;
+	margin-bottom: 4%;
+	border: 1px solid #ccc;
+	padding: 3%;
+	color: #555;
+}
+.form-style-6 input[type="text"]:focus,
+.form-style-6 textarea:focus,
+.form-style-6 select:focus
+{
+	box-shadow: 0 0 5px #43D1AF;
+	padding: 3%;
+	border: 1px solid #43D1AF;
 }

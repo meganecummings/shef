@@ -26,6 +26,7 @@ const recipeSection = document.getElementById('recipeSection');
 const $recipesLibrary = $('#recipesLibrary');
 const mainContainerR = document.getElementById('mainContainerR');
 const $mainContainerR = $('#mainContainerR');
+const ingredientList = document.getElementsByClassName('ingredientList');
 
 // ------------------- FUNCTIONS -------------------- //
 
@@ -49,24 +50,15 @@ const renderLib = () => {
     });
 }
 
-// // ADD NAV ACTIVE CLASS
-// navLinks.forEach(link => {
-//     // console.log(link.firstChild.getAttribute('href'));
-//     // console.log(window.location.pathname);
-//     if (window.location.pathname === link.firstChild.getAttribute('href')) {
-//         link.classList.add('active');
-//     }
-// })
-
 const recipeTemplate = (recipe) => {
     console.log(recipe);
     return `
     <div id="${recipe._id}">
-    <h4>${recipe.name}</h4>
-    <p class="ingredients">${recipe.ingredients}</p>
-    <p class="procedure">${recipe.procedure}</p>
-    <button class="delete-button">Delete</button>
-    <button class="edit-button">Edit</button>
+        <h4>${recipe.name}</h4>
+        <p class="ingredientList">${recipe.ingredients}</p>
+        <p class="procedure">${recipe.procedure}</p>
+        <button class="delete-button btn">Delete</button>
+        <button class="edit-button btn">Edit</button>
     </div>
     `
 }
@@ -74,7 +66,7 @@ const recipeTemplate = (recipe) => {
 const libTemplate = (recipe) => {
     return `
     <div id="${recipe._id}" class="individualRecipe">
-    <h4>${recipe.name}</h4>
+        <h4>${recipe.name}</h4>
     </div>
     `
 }
@@ -168,8 +160,8 @@ const editRecipe = (event) => {
                 <label style="display:block;" for="recipeProcedure">Recipe Procedure</label>
                 <input type="text" id="editRecipeProcedure" name="procedure" value="${recipeProcedure}"/>
             </div>
-            <button type="button" class="cancel-edit">Cancel</button>
-            <button type="submit" class="submit-edit">Submit</button>
+            <button type="button" class="cancel-edit btn">Cancel</button>
+            <button type="submit" class="submit-edit btn">Submit</button>
         </form>
     `;
 };
@@ -250,8 +242,8 @@ $recipesLibrary.on('click', '.individualRecipe', (e) => {
                     <h4>${state.recipes[i].name}</h4>
                     <p class="ingredients">${state.recipes[i].ingredients}</p>
                     <p class="procedure">${state.recipes[i].procedure}</p>
-                    <button class="delete-button">Delete</button>
-                    <button class="edit-button">Edit</button>
+                    <button class="delete-button btn">Delete</button>
+                    <button class="edit-button btn">Edit</button>
                 </div>
             </section>
                 `);
@@ -300,8 +292,8 @@ const editRecipe2 = (event) => {
             <label style="display:block;" for="recipeProcedure">Recipe Procedure</label>
             <input type="text" id="editRecipeProcedure" name="procedure" value="${recipeProcedure}"/>
         </div>
-        <button type="button" class="cancel-edit">Cancel</button>
-        <button type="submit" class="submit-edit">Submit</button>
+        <button type="button" class="cancel-edit btn">Cancel</button>
+        <button type="submit" class="submit-edit btn">Submit</button>
     </form>
     `;
 };

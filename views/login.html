@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="/styles/styles.css">
+    <!-- JQUERY JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous" defer></script>
+    <!-- Main JS -->
+    <script src="/scripts/app.js" defer></script>
+    <title>Shef</title>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg fixed-top navbar-light">
+            <a class="navbar-brand" href="/"><img class="icon-img" src="/assets/cleaver.svg"
+                    alt="cleaver-image">Shef</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon" id="navbarIcon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link recipe" href="/recipes">Recipes</a>
+                    </li>
+                    <li class="nav-item randomizer">
+                        <a class="nav-link" href="/random">Randomizer</a>
+                    </li>
+                    <li class="nav-item newRecipe">
+                        <a class="nav-link" href="/newrecipe">New Recipe</a>
+                    </li>
+                    <li class="nav-item login">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                    <li class="nav-item signUp">
+                        <a class="nav-link" href="/signup">Sign Up</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main id="mainContainerI">
+        <div class="container-contact2">
+            <div class="wrap-contact2">
+                <form class="contact2-form validate-form">
+                    <span class="contact2-form-title">
+                        Contact Us
+                    </span>
+        
+                    <div class="wrap-input2 validate-input" data-validate="Name is required">
+                        <input class="input2" type="text" name="name">
+                        <span class="focus-input2" data-placeholder="NAME"></span>
+                    </div>
+        
+                    <div class="wrap-input2 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                        <input class="input2" type="text" name="email">
+                        <span class="focus-input2" data-placeholder="EMAIL"></span>
+                    </div>
+        
+                    <div class="wrap-input2 validate-input" data-validate = "Message is required">
+                        <textarea class="input2" name="message"></textarea>
+                        <span class="focus-input2" data-placeholder="MESSAGE"></span>
+                    </div>
+        
+                    <div class="container-contact2-form-btn">
+                        <div class="wrap-contact2-form-btn">
+                            <div class="contact2-form-bgbtn"></div>
+                            <button class="contact2-form-btn">
+                                Send Your Message
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        </section>
+    </main>
+    <footer class="page-footer">
+        <nav class="navbar navbar-expand-sm fixed-bottom footer">
+            <div class="row mx-auto">
+                <ul class="navbar-nav footer-nav mx-auto">
+                    <li class="nav-item-footer">
+                        <a href="#">
+                            <img src="/assets/facebook.svg" alt="Facebook-icon">
+                        </a>
+                    </li>
+                    <li class="nav-item-footer twitter">
+                        <a href="#">
+                            <img src="/assets/twitter.svg" alt="Twitter-icon">
+                        </a>
+                    </li>
+                    <li class="nav-item-footer instagram">
+                        <a href="#">
+                            <img src="/assets/instagram.svg" alt="Instagram-icon">
+                        </a>
+                    </li>
+                    <li class="nav-item-footer pinterest">
+                        <a href="#">
+                            <img src="/assets/pinterest.svg" alt="Pinterest-icon">
+                        </a>
+                    <li class="nav-item-footer snapchat">
+                        <a href="#">
+                            <img src="/assets/snapchat.svg" alt="Snapchat-icon">
+                        </a>
+                </ul>
+            </div>
+            </div>
+        </nav>
+    </footer>
+</body>
+
+</html>
