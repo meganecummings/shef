@@ -6,11 +6,9 @@ const LIB_URL = ('/api/recipes');
 const navLinks = document.querySelectorAll('nav li');
 const form = document.querySelector('form');
 
-
 // ------------------- GLOBAL VARIABLES -------------------- //
 
 // ------------------- STATE VARIABLES -------------------- //
-
 
 const state = {
     recipe: {},
@@ -49,15 +47,6 @@ const renderLib = () => {
     });
 }
 
-// // ADD NAV ACTIVE CLASS
-// navLinks.forEach(link => {
-//     // console.log(link.firstChild.getAttribute('href'));
-//     // console.log(window.location.pathname);
-//     if (window.location.pathname === link.firstChild.getAttribute('href')) {
-//         link.classList.add('active');
-//     }
-// })
-
 const recipeTemplate = (recipe) => {
     console.log(recipe);
     return `
@@ -65,6 +54,7 @@ const recipeTemplate = (recipe) => {
     <h4>${recipe.name}</h4>
     <p class="ingredients">${recipe.ingredients}</p>
     <p class="procedure">${recipe.procedure}</p>
+    <img src="${recipe.image}" id="editRecipeImage" name="image" alt="${recipe.name} Image"/>
     <button class="delete-button">Delete</button>
     <button class="edit-button">Edit</button>
     </div>
@@ -75,6 +65,7 @@ const libTemplate = (recipe) => {
     return `
     <div id="${recipe._id}" class="individualRecipe">
     <h4>${recipe.name}</h4>
+    <img src="${recipe.image}" id="editRecipeImage" name="image" alt="${recipe.name} Image"/>
     </div>
     `
 }
@@ -115,17 +106,19 @@ const addNewRecipe = (event) => {
     const name = document.getElementById('name');
     const ingredients = document.getElementById('ingredients');
     const procedure = document.getElementById('procedure');
-    const newRecipe = ({ name: name.value, ingredients: ingredients.value, procedure: procedure.value });
+    const image = document.getElementById('image');
+    console.log(image);
+    const newRecipe = ({ name: name.value, ingredients: ingredients.value, procedure: procedure.value, image: image.value });
     console.log(JSON.stringify(newRecipe))
 
     // Data to submit
     fetch(`${BASE_URL}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newRecipe),
-    })
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newRecipe),
+        })
         .then((res) => res.json())
         .then((data) => {
             state.recipe = data.data;
@@ -134,6 +127,7 @@ const addNewRecipe = (event) => {
             name.value = '';
             ingredients.value = '';
             procedure.value = '';
+            image.value = '';
             name.focus();
             newRecipeSuccess(data);
         })
@@ -153,6 +147,7 @@ const editRecipe = (event) => {
     const recipeIngredients =
         event.target.parentNode.children[1].innerText;
     const recipeProcedure = event.target.parentNode.children[2].innerText;
+    const recipeImage = event.target.parentNode.children[3].innerText;
     event.target.parentNode.innerHTML = `
     <h4>Edit ${recipeName}</h4>
         <form>
@@ -168,6 +163,10 @@ const editRecipe = (event) => {
                 <label style="display:block;" for="recipeProcedure">Recipe Procedure</label>
                 <input type="text" id="editRecipeProcedure" name="procedure" value="${recipeProcedure}"/>
             </div>
+            <div>
+            <label style="display:block;" for="recipeImg">Recipe Image</label>
+            <img src="${recipeImg}" id="editRecipeImg" name="img" alt="${recipeName} Image"/>
+            </div>
             <button type="button" class="cancel-edit">Cancel</button>
             <button type="submit" class="submit-edit">Submit</button>
         </form>
@@ -179,15 +178,16 @@ const updateRecipe = (event) => {
     const recipeName = document.getElementById('editRecipeName').value;
     const recipeIngredients = document.getElementById('editRecipeIngredients').value;
     const recipeProcedure = document.getElementById('editRecipeProcedure').value;
-    const updatedRecipe = { name: recipeName, ingredients: recipeIngredients, procedure: recipeProcedure };
+    const recipeImg = document.getElementById('editRecipeImg').value;
+    const updatedRecipe = { name: recipeName, ingredients: recipeIngredients, procedure: recipeProcedure, img: recipeImg };
     console.log(recipeId);
     fetch(`${BASE_URL}/${recipeId}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(updatedRecipe),
-    })
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedRecipe),
+        })
         .then(res => res.json())
         .then((data) => {
             state.recipe = data.data;
@@ -201,8 +201,8 @@ const deleteRecipe = (event) => {
     const recipeId = event.target.parentNode.id;
     console.log(recipeId);
     fetch(`${BASE_URL}/${recipeId}`, {
-        method: 'delete'
-    })
+            method: 'delete'
+        })
         .then((response) => response.json())
         .then(recipesSection.innerHTML = '')
         .catch((err) => console.log(err))
@@ -250,6 +250,7 @@ $recipesLibrary.on('click', '.individualRecipe', (e) => {
                     <h4>${state.recipes[i].name}</h4>
                     <p class="ingredients">${state.recipes[i].ingredients}</p>
                     <p class="procedure">${state.recipes[i].procedure}</p>
+                    <img src="${state.recipes[i].img}" id="editRecipeImg" name="img" alt="${recipeName} Image"/>
                     <button class="delete-button">Delete</button>
                     <button class="edit-button">Edit</button>
                 </div>
@@ -285,6 +286,8 @@ const editRecipe2 = (event) => {
     const recipeName = event.target.parentNode.children[0].innerText;
     const recipeIngredients = event.target.parentNode.children[1].innerText;
     const recipeProcedure = event.target.parentNode.children[2].innerText;
+    const recipeImg = event.target.parentNode.children[3].innerText;
+
     event.target.parentNode.innerHTML = `
     <h4>Edit ${recipeName}</h4>
     <form>
@@ -300,6 +303,10 @@ const editRecipe2 = (event) => {
             <label style="display:block;" for="recipeProcedure">Recipe Procedure</label>
             <input type="text" id="editRecipeProcedure" name="procedure" value="${recipeProcedure}"/>
         </div>
+        <div>
+        <label style="display:block;" for="recipeImg">Recipe Image</label>
+        <img src="${recipeImg}" id="editRecipeImg" name="img" alt="${recipeName} Image"/>
+    </div>
         <button type="button" class="cancel-edit">Cancel</button>
         <button type="submit" class="submit-edit">Submit</button>
     </form>
@@ -311,15 +318,17 @@ const updateRecipe2 = (event) => {
     const recipeName = document.getElementById('editRecipeName').value;
     const recipeIngredients = document.getElementById('editRecipeIngredients').value;
     const recipeProcedure = document.getElementById('editRecipeProcedure').value;
-    const updatedRecipe = { name: recipeName, ingredients: recipeIngredients, procedure: recipeProcedure };
-    
+    const recipeImg = document.getElementById('editRecipeImg').value;
+
+    const updatedRecipe = { name: recipeName, ingredients: recipeIngredients, procedure: recipeProcedure, img: recipeImg };
+
     fetch(`${BASE_URL}/${recipeId}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(updatedRecipe),
-    })
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedRecipe),
+        })
         .then(res => res.json())
         .then(() => {
             window.location.replace(`/recipes`);
@@ -331,8 +340,8 @@ const deleteRecipe2 = (event) => {
     const recipeId = event.target.parentNode.id;
     console.log(recipeId);
     fetch(`${BASE_URL}/${recipeId}`, {
-        method: 'delete'
-    })
+            method: 'delete'
+        })
         .then((res) => res.json())
         .then(() => {
             window.location.replace(`/recipes`);
