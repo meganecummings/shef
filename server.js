@@ -34,11 +34,9 @@ app.use(cors({
     'preflightContinue': false
 }));
 
-require('./router/index')(app);
 
 // own middleware
 app.use((req, res, next) => {
-    console.log('REQ Session = ', req.session);
     next();
 })
 
@@ -58,7 +56,6 @@ app.set('view engine', 'ejs');
 // ------------------- ROUTES -------------------- //
 //ROOT ROUTE
 app.get('/', (req, res) => {
-    // res.sendFile(`${__dirname}/views/index.html`);
     res.render('homepage/show');
 });
 
@@ -80,21 +77,18 @@ app.get('/newrecipe', (req, res) => {
 // Recipe(s) Route
 app.get('/recipe', (req, res) => {
     res.render('profile/recipe', { currentUser: req.session.currentUser });
-    // res.sendFile(`${__dirname}/views/recipes.html`);
 });
 
 
 // Recipe(s) Route
 app.get('/recipes', (req, res) => {
     res.render('profile/recipes', { currentUser: req.session.currentUser });
-    // res.sendFile(`${__dirname}/views/recipes.html`);
 });
 
 // Accounts Route
 app.use('/accounts', routes.accounts);
 
 // Recipe Route
-// router.get('/:_id', ctrl.recipeCtrl.show);
 app.get('/recipes/:_id', (req, res) => {
     db.Recipe.findById(req.params._id, (err, foundRecipe) => {
         if (err) return res.status(400).json({

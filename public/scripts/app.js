@@ -50,22 +50,30 @@ const renderLib = () => {
 const recipeTemplate = (recipe) => {
     console.log(recipe);
     return `
-    <div id="${recipe._id}">
-    <h4>${recipe.name}</h4>
-    <p class="ingredients">${recipe.ingredients}</p>
-    <p class="procedure">${recipe.procedure}</p>
-    <img src="${recipe.image}" class="image" id="${recipe._id}/image" name="image" alt="${recipe.name} Image"/>
-    <button class="delete-button">Delete</button>
-    <button class="edit-button">Edit</button>
+    <div class="card" id="${recipe._id}">
+        <div class="img-container">
+            <img src="${recipe.image}" class="card-img" name="image" alt="${recipe.name} Image"/>
+        </div>
+        <div class="card-body">
+            <div class="card-header">${recipe.name}</div>
+            <p class="ingredients">${recipe.ingredients}</p>
+            <p class="procedure">${recipe.procedure}</p>
+        </div>
+        <button class="delete-button">Delete</button>
+        <button class="edit-button">Edit</button>
     </div>
     `
 }
 
 const libTemplate = (recipe) => {
     return `
-    <div id="${recipe._id}" class="individualRecipe">
-    <h4>${recipe.name}</h4>
-    <img src="${recipe.image}" id="${recipe._id}/image" name="image" alt="${recipe.name} Image"/>
+    <div class="card" id="${recipe._id}">
+        <div class="img-container">
+            <img src="${recipe.image}" class="card-img" name="image" alt="${recipe.name} Image"/>
+        </div>
+        <div class="card-body">
+            <div class="card-header">${recipe.name}</div>
+        </div>
     </div>
     `
 }
@@ -152,19 +160,19 @@ const editRecipe = (event) => {
     <h4>Edit ${recipeName}</h4>
         <form>
             <div>
-                <label style="display:block;" for="recipeName">Recipe Name</label>
+                <label for="recipeName">Recipe Name</label>
                 <input type="text" id="editRecipeName" name="name" value="${recipeName}"/>
             </div>
             <div>
-                <label style="display:block;" for="recipeIngredients">Recipe Ingredients</label>
+                <label for="recipeIngredients">Recipe Ingredients</label>
                 <input type="text" id="editRecipeIngredients" name="ingredients" value="${recipeIngredients}"/>
             </div>
             <div>
-                <label style="display:block;" for="recipeProcedure">Recipe Procedure</label>
+                <label for="recipeProcedure">Recipe Procedure</label>
                 <input type="text" id="editRecipeProcedure" name="procedure" value="${recipeProcedure}"/>
             </div>
             <div>
-            <label style="display:block;" for="recipeImage">Recipe Image</label>
+            <label for="recipeImage">Recipe Image</label>
             <img src="${recipeImage}" id="${recipe._id}/image" name="image" alt="${recipeName} Image"/>
             </div>
             <button type="button" class="cancel-edit">Cancel</button>
@@ -292,19 +300,19 @@ const editRecipe2 = (event) => {
     <h4>Edit ${recipeName}</h4>
     <form>
         <div>
-            <label style="display:block;" for="recipeName">Recipe Name</label>
+            <label for="recipeName">Recipe Name</label>
             <input type="text" id="editRecipeName" name="name" value="${recipeName}"/>
         </div>
         <div>
-            <label style="display:block;" for="recipeIngredients">Recipe Ingredients</label>
+            <label for="recipeIngredients">Recipe Ingredients</label>
             <input type="text" id="editRecipeIngredients" name="ingredients" value="${recipeIngredients}"/>
         </div>
         <div>
-            <label style="display:block;" for="recipeProcedure">Recipe Procedure</label>
+            <label for="recipeProcedure">Recipe Procedure</label>
             <input type="text" id="editRecipeProcedure" name="procedure" value="${recipeProcedure}"/>
         </div>
         <div>
-        <label style="display:block;" for="recipeImage">Recipe Image</label>
+        <label for="recipeImage">Recipe Image</label>
         <img src="${recipeImage}" id="${recipe._id}/image" name="image" alt="${recipeName} Image"/>
     </div>
         <button type="button" class="cancel-edit">Cancel</button>
