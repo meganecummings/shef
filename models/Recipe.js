@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const User = require('./User');
 
-const RecipeSchema = new Schema ({
+const RecipeSchema = new Schema({
     name: {
         type: String,
         required: true
@@ -10,7 +10,7 @@ const RecipeSchema = new Schema ({
     ingredients: {
         type: String,
         required: true
-        },
+    },
     // [
     //     {
     //         name: {
@@ -27,6 +27,7 @@ const RecipeSchema = new Schema ({
         type: String,
         required: true,
     },
+    image: { type: String },
     User: {
         type: Schema.Types.ObjectId,
         ref: 'User'
