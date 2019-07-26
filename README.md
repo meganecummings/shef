@@ -1,6 +1,6 @@
 # Shef
 * Shef will serve you a library for all your favorite recipes. Easily write, edit, delete and view all of your favorite recipes.
-[Link to project hosted on Heroku]()
+[Link to Shef hosted on Heroku](https://shefapp.herokuapp.com/)
 ## Technologies Used
 * Node.js
 * Express, JQuery, JavaScript, EJS
