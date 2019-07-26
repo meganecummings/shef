@@ -56,17 +56,17 @@ app.set('view engine', 'ejs');
 // ------------------- ROUTES -------------------- //
 //ROOT ROUTE
 app.get('/', (req, res) => {
-    res.render('homepage/show');
+    res.render('homepage/show', { currentUser: req.session.currentUser });
 });
 
 //Sign up Route
 app.get('/signup', (req, res) => {
-    res.render('accounts/signup');
+    res.render('accounts/signup', { currentUser: req.session.currentUser });
 });
 
 //Log In Route
 app.get('/login', (req, res) => {
-    res.render('accounts/login');
+    res.render('accounts/login', { currentUser: req.session.currentUser });
 });
 
 // New Recipe Route
