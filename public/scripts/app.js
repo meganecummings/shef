@@ -60,9 +60,9 @@ const recipeTemplate = (recipe) => {
             <div class="card-header">${recipe.name}</div>
             <p class="ingredients">${recipe.ingredients}</p>
             <p class="procedure">${recipe.procedure}</p>
+            <button class="delete-button btn">Delete</button>
+            <button class="edit-button btn">Edit</button>
         </div>
-        <button class="delete-button btn">Delete</button>
-        <button class="edit-button btn">Edit</button>
     </div>
     `
 }

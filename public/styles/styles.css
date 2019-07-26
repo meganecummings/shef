@@ -104,6 +104,15 @@ h1 {
 	top:1px;
 }
 
+#newrecipe-container{
+    display:flex;
+    flex-wrap: wrap;
+}
+
+/* #recipesSection {
+    float: right;
+} */
+
 .recipesContainer {
     margin: 5em;
 }
