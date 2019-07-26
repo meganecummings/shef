@@ -146,25 +146,21 @@ const editRecipe = (event) => {
         event.target.parentNode.children[1].innerText;
     const recipeProcedure = event.target.parentNode.children[2].innerText;
     event.target.parentNode.innerHTML = `
-    <h4>Edit ${recipeName}</h4>
+    <div class="form-style">
+        <h1>Edit ${recipeName}</h1>
         <form>
-            <div>
-                <label style="display:block;" for="recipeName">Recipe Name</label>
-                <input type="text" id="editRecipeName" name="name" value="${recipeName}"/>
-            </div>
-            <div>
-                <label style="display:block;" for="recipeIngredients">Recipe Ingredients</label>
-                <input type="text" id="editRecipeIngredients" name="ingredients" value="${recipeIngredients}"/>
-            </div>
-            <div>
-                <label style="display:block;" for="recipeProcedure">Recipe Procedure</label>
-                <input type="text" id="editRecipeProcedure" name="procedure" value="${recipeProcedure}"/>
-            </div>
+            <input type="text" id="editRecipeName" name="name" value="${recipeName}" />
+            <input type="text" id="editRecipeIngredients" name="ingredients" value="${recipeIngredients}" />
+            <input type="text" id="editRecipeProcedure" name="procedure" value="${recipeProcedure}" />
             <button type="button" class="cancel-edit btn">Cancel</button>
             <button type="submit" class="submit-edit btn">Submit</button>
         </form>
+    </div>
     `;
 };
+
+
+
 
 const updateRecipe = (event) => {
     const recipeId = event.target.parentNode.parentNode.id;
@@ -278,23 +274,16 @@ const editRecipe2 = (event) => {
     const recipeIngredients = event.target.parentNode.children[1].innerText;
     const recipeProcedure = event.target.parentNode.children[2].innerText;
     event.target.parentNode.innerHTML = `
-    <h4>Edit ${recipeName}</h4>
-    <form>
-        <div>
-            <label style="display:block;" for="recipeName">Recipe Name</label>
-            <input type="text" id="editRecipeName" name="name" value="${recipeName}"/>
-        </div>
-        <div>
-            <label style="display:block;" for="recipeIngredients">Recipe Ingredients</label>
-            <input type="text" id="editRecipeIngredients" name="ingredients" value="${recipeIngredients}"/>
-        </div>
-        <div>
-            <label style="display:block;" for="recipeProcedure">Recipe Procedure</label>
-            <input type="text" id="editRecipeProcedure" name="procedure" value="${recipeProcedure}"/>
-        </div>
-        <button type="button" class="cancel-edit btn">Cancel</button>
-        <button type="submit" class="submit-edit btn">Submit</button>
-    </form>
+    <div class="form-style">
+    <h1>Edit ${recipeName}</h1>
+        <form>
+            <input type="text" id="editRecipeName" name="name" value="${recipeName}" />
+            <input type="text" id="editRecipeIngredients" name="ingredients" value="${recipeIngredients}" />
+            <input type="text" id="editRecipeProcedure" name="procedure" value="${recipeProcedure}" />
+            <button type="button" class="cancel-edit btn">Cancel</button>
+            <button type="submit" class="submit-edit btn">Submit</button>
+        </form>
+    </div>
     `;
 };
 

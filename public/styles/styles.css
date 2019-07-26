@@ -17,12 +17,23 @@ body {
     z-index: -1;
 }
 
-#hero-image2 {
+.hero-image2 {
     width: 100vw;
     height: 100vh;
-    object-fit: cover;
+    object-fit: contain;
     position: absolute;
     z-index: -1;
+}
+
+.hero-image2 img {
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0; 
+    margin: auto; 
+    min-width: 50%;
+    min-height: 50%;
 }
 
 #jumbotron-container {
@@ -42,7 +53,8 @@ h1 {
 }
 
 .btn {
-    background:linear-gradient(to bottom, rgba(231, 249, 250, 0.5), rgba(202, 238, 222, 0.5));
+    box-shadow:inset 0px 0px 14px -3px rgba(223, 233, 220, 0.938);
+    background-color:rgba(235, 255, 220);
 	border-radius:6px;
 	border:1px solid rgba(255, 255, 255, 0.906);
 	display:inline-block;
@@ -55,9 +67,8 @@ h1 {
     margin: 0 1em;
 }
 .btn:hover {
-    box-shadow:inset 0px 0px 14px -3px rgba(223, 233, 220, 0.938);
-	background-color:rgb(226,234,240, 0.6);
-    background-color:#b6d1a3;
+    background:linear-gradient(to bottom, rgba(231, 249, 250, 0.5), rgba(202, 238, 222, 0.5));
+    background-color:rgba(238, 252, 229, .5);
     color: black;
 }
 .btn:active {
@@ -151,27 +162,27 @@ li.active a, nav li:hover a {
     border-radius: 5%;
 }
 
-
-/*  */
-
-.form-style-6{
+.form-style{
 	max-width: 400px;
-    margin: 7em auto 0 auto;
 	padding: 16px;
-	background: #F7F7F7;
+    background: rgb(247, 247, 247, 0.7);
+    margin: 20px auto;
+    position: relative;
+    text-align: center;
 }
-.form-style-6 h1{
-	background: #43D1AF;
+.form-style h1{
+	background:linear-gradient(to bottom, rgba(231, 249, 250, 0.5), rgba(202, 238, 222, 0.5));
 	font-size: 140%;
-	font-weight: 300;
+	font-weight: 600;
 	text-align: center;
-	color: #fff;
-	margin: -16px -16px 16px -16px;
+	color: black;
 }
 
-.form-style-6 input[type="text"],
-.form-style-6 textarea,
-.form-style-6 select 
+.form-style input[type="text"],
+.form-style input[type="email"],
+.form-style input[type="password"],
+.form-style textarea,
+.form-style select 
 {
 	outline: none;
 	width: 100%;
@@ -181,11 +192,17 @@ li.active a, nav li:hover a {
 	padding: 3%;
 	color: #555;
 }
-.form-style-6 input[type="text"]:focus,
-.form-style-6 textarea:focus,
-.form-style-6 select:focus
+.form-style input[type="text"]:focus,
+.form-style input[type="email"]:focus,
+.form-style input[type="password"]:focus,
+.form-style textarea:focus,
+.form-style select:focus
 {
 	box-shadow: 0 0 5px #43D1AF;
 	padding: 3%;
 	border: 1px solid #43D1AF;
+}
+
+.form-group {
+    margin: 0;
 }

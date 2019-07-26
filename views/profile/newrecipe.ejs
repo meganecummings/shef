@@ -1,35 +1,20 @@
 <% include ../partials/_head.ejs %>
 
 <main>
-    <section class="background-container">
-        <img id="hero-image2" src="/assets/body.jpg" alt="table">
-    </section>
-    <section>
-        <div class="form-style-6">
-            <h1>New Recipe:</h1>
-            <form id="newRecipeForm">
-                <input type="text" id="name" name="name" placeholder="Recipe" />
-                <textarea type="text" id="ingredients" name="ingredients" placeholder="List your ingredients here"
-                    wrap="hard"></textarea>
-                <textarea type="text" id="procedure" name="procedure" placeholder="Put your Procedure here"></textarea>
-                <button type="submit" id="add-recipe-btn" class="btn">Add Recipe</button>
-            </form>
-        </div>
-
-
-
-        <!-- <section>
-        <form id="newRecipeForm">
-            <h1>New Recipe</h1>
-            <input type="text" id="name" name="name" placeholder="Recipe" />
-            <textarea type="text" id="ingredients" name="ingredients" placeholder="List your ingredients here"
-                wrap="hard"></textarea>
-            <input type="text" id="procedure" name="procedure" placeholder="Put your Procedure here" />
-            <button type="submit" id="add-recipe-btn" class="btn">Add Recipe</button>
-        </form>
-    </section> -->
-        <section id="recipesSection">
-
+    <section class="hero-image2">
+        <!-- <img src="/assets/body.jpg" alt="table"> -->
+        <section>
+            <div class="form-style">
+                <h1>New Recipe</h1>
+                <form id="newRecipeForm">
+                    <input type="text" id="name" name="name" placeholder="Recipe Name" />
+                    <textarea type="text" id="ingredients" name="ingredients" placeholder="Ingredients"
+                        wrap="hard"></textarea>
+                    <textarea type="text" id="procedure" name="procedure" placeholder="Procedure"></textarea>
+                    <button type="submit" id="add-recipe-btn" class="btn">Add Recipe</button>
+                </form>
+            </div>
+            <section id="recipesSection"></section>
         </section>
     </section>
 </main>

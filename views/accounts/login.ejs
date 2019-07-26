@@ -1,21 +1,23 @@
 <% include ../partials/_head.ejs %>
 
-<section class="login">
-    <div class="container">
-        <h2>Log In</h2>
-        <form method="POST" action="/accounts/login"> 
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="text" id="email" name="email" placeholder="Email" autofocus/>
-            </div> 
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Password"/>
-            </div>     
-            <input type="submit" value="Log Me In!"/>
-        </form>
-        
-    </div>
-</section>
+<main>
+    <section class="hero-image2">
+        <img src="/assets/body.jpg" alt="table">
+        <section class="login">
+            <div class="container form-style">
+                <h2>Log In</h2>
+                <form method="POST" action="/accounts/login">
+                    <div class="form-group">
+                        <input type="text" id="email" name="email" placeholder="Email" autofocus />
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="password" name="password" placeholder="Password" />
+                    </div>
+                    <button type="submit" id="login-btn" class="btn">Log In</button>
+                </form>
+            </div>
+        </section>
+    </section>
+</main>
 
 <% include ../partials/_footer.ejs %>
