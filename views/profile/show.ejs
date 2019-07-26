@@ -1,29 +1,23 @@
 <% include ../partials/_head.ejs %>
 
-    <main id="mainContainerI">
-        <section class="background-container">
-            <img id="hero-image" src="/assets/homepage.jpg" alt="fruits">
-        </section>
-        <section>
-            <div class="container" id="jumbotron-container">
-                <div class="jumbotron" id="jumbotron">
-                    <h1>Welcome to Shef,
-                        <%= currentUser && currentUser.name %>
-                    </h1>
-                    <p class="lead">Lorem ipsum dolor, sit amet consectetur adipisicing elit. At adipisci explicabo blanditiis laudantium similique iure, nesciunt aperiam dolores facere nostrum eius eligendi perspiciatis. Deleniti praesentium similique totam fugit culpa.
-                        Inventore!</p>
-                    <hr class="my-4">
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Delectus aperiam et quod autem ratione voluptate, nesciunt dolorum numquam, a libero modi vel cumque cupiditate! Mollitia ipsam velit deleniti nobis illo!</p>
-                    <a class="btn btn-start btn-lg" href="/recipes" role="button">All Recipes</a>
-                    <a class="btn btn-start btn-lg" href="/newrecipe" role="button">Got a New Recipe?</a>
-                </div>
+<main>
+    <section class="background-container">
+        <img id="hero-image" src="/assets/homepage.jpg" alt="fruits">
+    </section>
+    <section>
+        <div class="container" id="jumbotron-container">
+            <div class="jumbotron" id="jumbotron">
+                <h1>Welcome Shef <%= currentUser && currentUser.name %>!</h1>
+                <p class="lead">What's on the menu today?</p>
+                <hr class="my-4">
+                <p>"Without experimentation, a willingness to ask questions and try new things, we shall surely
+                    become static, repetitive, and moribund.”</p>
+                <p>-Anthony Bourdain</p>
+                <a class="btn btn-start btn-lg" href="/recipes" role="button">My Cookbook</a>
+                <a class="btn btn-start btn-lg" href="/newrecipe" role="button">Add Recipe</a>
             </div>
-        </section>
-        <section>
-            <div class="container">
-            </div>
-        </section>
-    </main>
-
+        </div>
+    </section>
+</main>
 
     <% include ../partials/_footer.ejs %>
