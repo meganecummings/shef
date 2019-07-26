@@ -6,11 +6,9 @@ const LIB_URL = ('/api/recipes');
 const navLinks = document.querySelectorAll('nav li');
 const form = document.querySelector('form');
 
-
 // ------------------- GLOBAL VARIABLES -------------------- //
 
 // ------------------- STATE VARIABLES -------------------- //
-
 
 const state = {
     recipe: {},
@@ -27,6 +25,7 @@ const $recipesLibrary = $('#recipesLibrary');
 const mainContainerR = document.getElementById('mainContainerR');
 const $mainContainerR = $('#mainContainerR');
 const ingredientList = document.getElementsByClassName('ingredientList');
+const card = document.getElementsByClassName('card');
 
 // ------------------- FUNCTIONS -------------------- //
 
@@ -53,10 +52,15 @@ const renderLib = () => {
 const recipeTemplate = (recipe) => {
     console.log(recipe);
     return `
-    <div id="${recipe._id}">
-        <h4>${recipe.name}</h4>
-        <p class="ingredientList">${recipe.ingredients}</p>
-        <p class="procedure">${recipe.procedure}</p>
+    <div class="card" id="${recipe._id}">
+        <div class="img-container">
+            <img src="${recipe.image}" class="card-img" name="image" alt="${recipe.name} Image"/>
+        </div>
+        <div class="card-body">
+            <div class="card-header">${recipe.name}</div>
+            <p class="ingredients">${recipe.ingredients}</p>
+            <p class="procedure">${recipe.procedure}</p>
+        </div>
         <button class="delete-button btn">Delete</button>
         <button class="edit-button btn">Edit</button>
     </div>
@@ -65,8 +69,13 @@ const recipeTemplate = (recipe) => {
 
 const libTemplate = (recipe) => {
     return `
-    <div id="${recipe._id}" class="individualRecipe">
-        <h4>${recipe.name}</h4>
+    <div class="card individualRecipe" id="${recipe._id}">
+        <div class="img-container">
+            <img src="${recipe.image}" class="card-img" name="image" alt="${recipe.name} Image"/>
+        </div>
+        <div class="card-body">
+            <div class="card-header">${recipe.name}</div>
+        </div>
     </div>
     `
 }
@@ -107,25 +116,26 @@ const addNewRecipe = (event) => {
     const name = document.getElementById('name');
     const ingredients = document.getElementById('ingredients');
     const procedure = document.getElementById('procedure');
-    const newRecipe = ({ name: name.value, ingredients: ingredients.value, procedure: procedure.value });
+    const image = document.getElementById('image');
+    const newRecipe = ({ name: name.value, ingredients: ingredients.value, procedure: procedure.value, image: image.value });
     console.log(JSON.stringify(newRecipe))
 
     // Data to submit
     fetch(`${BASE_URL}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newRecipe),
-    })
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newRecipe),
+        })
         .then((res) => res.json())
         .then((data) => {
             state.recipe = data.data;
-            // library.recipes.push(data.data);
             render(state.recipes);
             name.value = '';
             ingredients.value = '';
             procedure.value = '';
+            image.value = '';
             name.focus();
             newRecipeSuccess(data);
         })
@@ -141,10 +151,12 @@ const newRecipeError = (error) => {
 };
 
 const editRecipe = (event) => {
+    console.log(event);
     const recipeName = event.target.parentNode.children[0].innerText;
     const recipeIngredients =
         event.target.parentNode.children[1].innerText;
     const recipeProcedure = event.target.parentNode.children[2].innerText;
+    const recipeImage = event.target.parentNode.children[3].innerText;
     event.target.parentNode.innerHTML = `
     <div class="form-style">
         <h1>Edit ${recipeName}</h1>
@@ -152,11 +164,15 @@ const editRecipe = (event) => {
             <input type="text" id="editRecipeName" name="name" value="${recipeName}" />
             <input type="text" id="editRecipeIngredients" name="ingredients" value="${recipeIngredients}" />
             <input type="text" id="editRecipeProcedure" name="procedure" value="${recipeProcedure}" />
+            <div>
+              <label for="recipeImage">Recipe Image</label>
+            <img src="${recipeImage}" id="${recipe._id}/image" name="image" alt="${recipeName} Image"/>
+            </div>
             <button type="button" class="cancel-edit btn">Cancel</button>
             <button type="submit" class="submit-edit btn">Submit</button>
         </form>
     </div>
-    `;
+    `
 };
 
 
@@ -167,15 +183,16 @@ const updateRecipe = (event) => {
     const recipeName = document.getElementById('editRecipeName').value;
     const recipeIngredients = document.getElementById('editRecipeIngredients').value;
     const recipeProcedure = document.getElementById('editRecipeProcedure').value;
-    const updatedRecipe = { name: recipeName, ingredients: recipeIngredients, procedure: recipeProcedure };
+    const recipeImage = document.getElementById('editRecipeImage').value;
+    const updatedRecipe = { name: recipeName, ingredients: recipeIngredients, procedure: recipeProcedure, image: recipeImage };
     console.log(recipeId);
     fetch(`${BASE_URL}/${recipeId}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(updatedRecipe),
-    })
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedRecipe),
+        })
         .then(res => res.json())
         .then((data) => {
             state.recipe = data.data;
@@ -187,10 +204,9 @@ const updateRecipe = (event) => {
 
 const deleteRecipe = (event) => {
     const recipeId = event.target.parentNode.id;
-    console.log(recipeId);
     fetch(`${BASE_URL}/${recipeId}`, {
-        method: 'delete'
-    })
+            method: 'delete'
+        })
         .then((response) => response.json())
         .then(recipesSection.innerHTML = '')
         .catch((err) => console.log(err))
@@ -199,11 +215,9 @@ const deleteRecipe = (event) => {
 const handleRecipesSectionClick = (event) => {
     event.preventDefault();
     if (event.target.classList.contains('edit-button')) {
-        console.log(event);
         editRecipe(event);
     };
     if (event.target.classList.contains('delete-button')) {
-        console.log(event);
         deleteRecipe(event);
     };
     if (event.target.classList.contains('cancel-edit')) {
@@ -225,9 +239,7 @@ if (recipesSection) {
 };
 
 $recipesLibrary.on('click', '.individualRecipe', (e) => {
-    const $recipeId = ($(e.target).parent().attr('id'));
-    // console.log($recipeId);
-    // console.log(state.recipes);
+    const $recipeId = ($(e.target).parent().parent().attr('id'));
     for (let i = 0; i < state.recipes.length; i++) {
         if ($recipeId === state.recipes[i]._id) {
             console.log(`Yay we found ${state.recipes[i].name}`);
@@ -236,20 +248,21 @@ $recipesLibrary.on('click', '.individualRecipe', (e) => {
             <section id="recipesSection">    
                 <div id="${state.recipes[i]._id}">
                     <h4>${state.recipes[i].name}</h4>
+                    <h6>Ingredients</h6>
                     <p class="ingredients">${state.recipes[i].ingredients}</p>
+                    <h6>Procedure</h6>
                     <p class="procedure">${state.recipes[i].procedure}</p>
+                    <img src="${state.recipes[i].image}" id="${state.recipes[i]._id}/image" name="image" alt="${state.recipes[i].name} Image"/>
                     <button class="delete-button btn">Delete</button>
                     <button class="edit-button btn">Edit</button>
                 </div>
             </section>
-                `);
+           `);
         };
     };
 })
 
-
 // --------------------- INDIVDUAL RECIPE CRUD ---------------------- //
-
 
 const handleRecipesSectionClick2 = (event) => {
     event.preventDefault();
@@ -270,9 +283,13 @@ const handleRecipesSectionClick2 = (event) => {
 };
 
 const editRecipe2 = (event) => {
+    console.log(event);
     const recipeName = event.target.parentNode.children[0].innerText;
     const recipeIngredients = event.target.parentNode.children[1].innerText;
     const recipeProcedure = event.target.parentNode.children[2].innerText;
+    const recipeImage = event.target.parentNode.children[3].src;
+
+    console.log(recipeImage);
     event.target.parentNode.innerHTML = `
     <div class="form-style">
     <h1>Edit ${recipeName}</h1>
@@ -280,6 +297,8 @@ const editRecipe2 = (event) => {
             <input type="text" id="editRecipeName" name="name" value="${recipeName}" />
             <input type="text" id="editRecipeIngredients" name="ingredients" value="${recipeIngredients}" />
             <input type="text" id="editRecipeProcedure" name="procedure" value="${recipeProcedure}" />
+            <label for="recipeImage">Recipe Image</label>
+            <input type="text" id="editRecipeImage" name="image" value="${recipeImage}"/>
             <button type="button" class="cancel-edit btn">Cancel</button>
             <button type="submit" class="submit-edit btn">Submit</button>
         </form>
@@ -292,15 +311,17 @@ const updateRecipe2 = (event) => {
     const recipeName = document.getElementById('editRecipeName').value;
     const recipeIngredients = document.getElementById('editRecipeIngredients').value;
     const recipeProcedure = document.getElementById('editRecipeProcedure').value;
-    const updatedRecipe = { name: recipeName, ingredients: recipeIngredients, procedure: recipeProcedure };
-    
+    const recipeImage = document.getElementById('editRecipeImage').value;
+
+    const updatedRecipe = { name: recipeName, ingredients: recipeIngredients, procedure: recipeProcedure, image: recipeImage };
+
     fetch(`${BASE_URL}/${recipeId}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(updatedRecipe),
-    })
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedRecipe),
+        })
         .then(res => res.json())
         .then(() => {
             window.location.replace(`/recipes`);
@@ -312,8 +333,8 @@ const deleteRecipe2 = (event) => {
     const recipeId = event.target.parentNode.id;
     console.log(recipeId);
     fetch(`${BASE_URL}/${recipeId}`, {
-        method: 'delete'
-    })
+            method: 'delete'
+        })
         .then((res) => res.json())
         .then(() => {
             window.location.replace(`/recipes`);
@@ -330,12 +351,8 @@ form && form.addEventListener('submit', (e) => {
     [...document.querySelectorAll(`.alert`)].forEach(alert => {
         alert.parentNode.removeChild(alert);
     });
-    // e.preventDefault();
-    // const formInputs = [...form.elements];
-    // console.log(formInputs);
     [...form.elements].forEach(input => {
         if (input.type !== 'submit' && input.value === '') {
-            // console.log('click')
             e.preventDefault();
             input.classList.add('input-error');
             input.insertAdjacentHTML('afterend', `
@@ -347,22 +364,9 @@ form && form.addEventListener('submit', (e) => {
     });
 });
 
-// //VALIDATE FORM INPUT ON BLUR
-// document.addEventListener('blur', (e) => {
-//     if (e.target.value === '') {
-//         e.target.classList.add('input-error');
-//         e.target.insertAdjacentHTML('afterend', `
-//                 <div class="alert alert-${e.target.id}">
-//                     Please Enter ${e.target.placeholder}
-//                 </div>
-//             `);
-//     }
-// }, true);
-
-
-// // CLEAR FORM ERRORS ON FOCUS
-// document.addEventListener('focus', (e) => {
-//     e.target.classList.remove('input-error');
-//     const inputMessage = document.querySelector(`.alert-${e.target.id}`);
-//     inputMessage && inputMessage.parentNode.removeChild(inputMessage);
-// }, true)
+// CLEAR FORM ERRORS ON FOCUS
+document.addEventListener('focus', (e) => {
+    e.target.classList.remove('input-error');
+    const inputMessage = document.querySelector(`.alert-${e.target.id}`);
+    inputMessage && inputMessage.parentNode.removeChild(inputMessage);
+}, true)

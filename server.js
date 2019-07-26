@@ -2,7 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
-
+var cors = require('cors');
 
 // ------------------- INSTANCED MODULES -------------------- //
 const app = express();
@@ -21,15 +21,14 @@ function getTime() {
 //Express Sessions
 app.use(session({
     secret: 'This secret can be anything you want. It is used to encrpyt the session object',
-    resave: false, 
+    resave: false,
     saveUninitialized: false,
-  }))
+}))
 
 // own middleware
 app.use((req, res, next) => {
-    console.log('REQ Session = ', req.session);
     next();
-  })
+})
 
 // BodyParser Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -47,43 +46,44 @@ app.set('view engine', 'ejs');
 // ------------------- ROUTES -------------------- //
 //ROOT ROUTE
 app.get('/', (req, res) => {
-    // res.sendFile(`${__dirname}/views/index.html`);
-    res.render('homepage/show');
+    res.render('homepage/show', { currentUser: req.session.currentUser });
 });
 
 //Sign up Route
 app.get('/signup', (req, res) => {
-    res.render('accounts/signup');
+    res.render('accounts/signup', { currentUser: req.session.currentUser });
 });
 
 //Log In Route
 app.get('/login', (req, res) => {
-    res.render('accounts/login');
+    res.render('accounts/login', { currentUser: req.session.currentUser });
 });
 
 // New Recipe Route
 app.get('/newrecipe', (req, res) => {
-    res.render('profile/newrecipe', {currentUser: req.session.currentUser});
+    res.render('profile/newrecipe', { currentUser: req.session.currentUser });
 });
+
+// Profiles Route
+app.use('/profile', routes.profile);
+
+// Accounts Route
+app.use('/accounts', routes.accounts);
 
 // Recipe(s) Route
 app.get('/recipe', (req, res) => {
-    res.render('profile/recipe', {currentUser: req.session.currentUser});
-    // res.sendFile(`${__dirname}/views/recipes.html`);
+    res.render('profile/recipe', { currentUser: req.session.currentUser });
 });
-
 
 // Recipe(s) Route
 app.get('/recipes', (req, res) => {
-    res.render('profile/recipes', {currentUser: req.session.currentUser});
-    // res.sendFile(`${__dirname}/views/recipes.html`);
+    res.render('profile/recipes', { currentUser: req.session.currentUser });
 });
 
 // Accounts Route
 app.use('/accounts', routes.accounts);
 
 // Recipe Route
-// router.get('/:_id', ctrl.recipeCtrl.show);
 app.get('/recipes/:_id', (req, res) => {
     db.Recipe.findById(req.params._id, (err, foundRecipe) => {
         if (err) return res.status(400).json({
@@ -145,12 +145,6 @@ app.put('/api/newrecipe/:_id', (req, res) => {
     });
 });
 
-// Profiles Route
-app.use('/profile', routes.profile);
-
-// Accounts Route
-app.use('/accounts', routes.accounts);
-
 // API Routing 
 // Recipe Routing
 app.use('/api/recipes', routes.recipes);
@@ -158,10 +152,10 @@ app.use('/api/recipes', routes.recipes);
 //Users Routing
 app.get('/api/v1/users', (req, res) => {
     db.User.find({}, (err, allUsers) => {
-      if (err) return res.json({ status: 400, error: err });
-      res.json({ status: 200, data: allUsers });
+        if (err) return res.json({ status: 400, error: err });
+        res.json({ status: 200, data: allUsers });
     });
-  });
+});
 
 // ------------------- SERVER LISTENERS -------------------- //
 
