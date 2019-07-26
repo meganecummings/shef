@@ -52,11 +52,8 @@ const renderLib = () => {
 const recipeTemplate = (recipe) => {
     return `
     <div class="card" id="${recipe._id}">
-        <div class="img-container">
-            <img src="${recipe.image}" class="card-img" name="image" alt="${recipe.name} Image"/>
-        </div>
-        <div class="card-body">
-            <div class="card-header">${recipe.name}</div>
+        <div class="card-main">
+            <h2>${recipe.name}</h2>
             <p class="ingredients">${recipe.ingredients}</p>
             <p class="procedure">${recipe.procedure}</p>
             <button class="delete-button btn">Delete</button>
@@ -147,16 +144,17 @@ const newRecipeError = (error) => {
 };
 
 const editRecipe = (event) => {
-    const recipeName = event.target.parentNode.children[0].innerText;
-    const recipeIngredients =
-        event.target.parentNode.children[1].innerText;
-    const recipeProcedure = event.target.parentNode.children[2].innerText;
-    const recipeImage = event.target.parentNode.children[3].src;
+    console.log(event.target.parentNode.parentNode.parentNode.children[1]);
+    const recipeName = event.target.parentNode.parentNode.parentNode.children[0].innerText;
+    const recipeIngredients = event.target.parentNode.parentNode.parentNode.children[1].innerText;
+    const recipeProcedure = event.target.parentNode.parentNode.parentNode.children[2].innerText;
     event.target.parentNode.innerHTML = `
     <div class="form-style">
-        <h1>Edit ${recipeName}</h1>
+        <h2>Edit ${recipeName}</h2>
         <form>
             <input type="text" id="editRecipeName" name="name" value="${recipeName}" />
+            <textarea type="text" id="editRecipeIngredients" name="ingredients" wrap="hard" value="${recipeIngredients}"></textarea>
+            <textarea type="text" id="editRecipeProcedure" name="procedure" value="${recipeProcedure}"></textarea>
             <input type="text" id="editRecipeIngredients" name="ingredients" value="${recipeIngredients}" />
             <input type="text" id="editRecipeProcedure" name="procedure" value="${recipeProcedure}" />
             <div>
@@ -177,7 +175,6 @@ const updateRecipe = (event) => {
     const recipeName = document.getElementById('editRecipeName').value;
     const recipeIngredients = document.getElementById('editRecipeIngredients').value;
     const recipeProcedure = document.getElementById('editRecipeProcedure').value;
-    const recipeImage = document.getElementById('editRecipeImage').value;
     const updatedRecipe = { name: recipeName, ingredients: recipeIngredients, procedure: recipeProcedure, image: recipeImage };
     fetch(`${BASE_URL}/${recipeId}`, {
             method: 'PUT',
@@ -196,6 +193,7 @@ const updateRecipe = (event) => {
 
 
 const deleteRecipe = (event) => {
+    console.log(event);
     const recipeId = event.target.parentNode.id;
     fetch(`${BASE_URL}/${recipeId}`, {
             method: 'delete'
