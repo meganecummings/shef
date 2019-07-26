@@ -301,7 +301,7 @@ nav li:hover a {
 }
 
 .card-header {
-    font-size: 2em;
+    font-size: 1em;
     font-weight: bold;
     text-align: center;
     z-index: 5;
