@@ -12,6 +12,6 @@
 * View all available Recipes
 * Delete Recipes in Library
 ## Planned Features
-* Adjust Delete Functionality to only the User who created the Recipes *
+* Adjust Delete Functionality to only the User who created the Recipes
 ---
 GA © Meg & James
